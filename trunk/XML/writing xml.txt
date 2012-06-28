@@ -1,0 +1,31 @@
+
+private String writeXml(List<Message> messages){
+    XmlSerializer serializer = Xml.newSerializer();
+    StringWriter writer = new StringWriter();
+    try {
+        serializer.setOutput(writer);
+        serializer.startDocument("UTF-8", true);
+        serializer.startTag("", "messages");
+        serializer.attribute("", "number", String.valueOf(messages.size()));
+        for (Message msg: messages){
+            serializer.startTag("", "message");
+            serializer.attribute("", "date", msg.getDate());
+            serializer.startTag("", "title");
+            serializer.text(msg.getTitle());
+            serializer.endTag("", "title");
+            serializer.startTag("", "url");
+            serializer.text(msg.getLink().toExternalForm());
+            serializer.endTag("", "url");
+            serializer.startTag("", "body");
+            serializer.text(msg.getDescription());
+            serializer.endTag("", "body");
+            serializer.endTag("", "message");
+        }
+        serializer.endTag("", "messages");
+        serializer.endDocument();
+        return writer.toString();
+    } catch (Exception e) {
+        throw new RuntimeException(e);
+    } 
+}
+

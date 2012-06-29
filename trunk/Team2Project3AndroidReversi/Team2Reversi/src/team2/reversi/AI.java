@@ -4,6 +4,7 @@ import java.util.List;
 
 //import GameLogic;
 
+
 public class AI {
 
 	// ///////////////////// CONSTANTS ///////////////////////////////////

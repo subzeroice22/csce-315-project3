@@ -48,7 +48,7 @@ public class Reversi extends Activity implements GameEventsListener,
 
 		super.onCreate(savedInstanceState);
 
-		this.setTitle("Rever-droid");
+		this.setTitle("Team 2 Reversi");
 		this.setContentView(R.layout.main);
 
 		// retrieving the old facade if any
@@ -125,7 +125,7 @@ public class Reversi extends Activity implements GameEventsListener,
 	}
 
 	/**
-	 * Occurs when the score has changed... so refrewhing counters
+	 * Occurs when the score has changed... so refreshing counters
 	 */
 	@Override
 	public void onScoreChanged(int p1Score, int p2Score) {

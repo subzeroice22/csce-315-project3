@@ -39,6 +39,7 @@ public class MachineThread implements Runnable {
 
 		
 		do {
+			System.out.print("machine trying to play\n");
 			Movement machineMovement = this.machinePlays();
 			if (machineMovement != null) {
 				playerHasChanged = this.doMovement(GameLogic.PLAYER_TWO,
@@ -46,6 +47,7 @@ public class MachineThread implements Runnable {
 								.getRow());
 			} else {
 				//if machine movement is null.. machine cannot play 
+				System.out.print("machine cannot play\n");
 				playerHasChanged = true;
 			}
 			// it can happen that the human can not play...

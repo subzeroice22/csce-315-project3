@@ -67,13 +67,13 @@ public class GameBoard extends View {
 	 * The color used by the player 1
 	 */
 	private int playerOneColor = Color.BLUE;
-	private int playerOneInsideColor = Color.rgb(255, 255, 255);//was blue(0, 0, 150), set to white (255,255,255)
+	private int playerOneInsideColor = Color.rgb(0, 0, 150);
 
 	/**
 	 * Color used by player 2
 	 */
 	private int playerTwoColor = Color.RED;
-	private int playerTwoInsideColor = Color.rgb(0, 0, 0);//was red(150,0,0), set to black (0,0,0)
+	private int playerTwoInsideColor = Color.rgb(150, 0, 0);
 
 	/**
 	 * The first time parameters are not calculated
@@ -146,7 +146,7 @@ public class GameBoard extends View {
 
 			float x = event.getX();
 			float y = event.getY();
-			// getting column and row where the click was performed
+			// getting column and row where the click was perfomed
 			int col = transformCoordinateXInColumn(x);
 			int row = transformCoordinateYInRow(y);
 
@@ -274,7 +274,7 @@ public class GameBoard extends View {
 
 		this.canvas.drawCircle(cx, cy, radius, paint);
 		paint.setColor(insideColor);
-		this.canvas.drawCircle(cx, cy, radius - 1, paint);
+		this.canvas.drawCircle(cx, cy, radius - 4, paint);
 	}
 
 	/**
@@ -295,7 +295,7 @@ public class GameBoard extends View {
 					for (int j = 0; j < GameLogic.ROWS; j++) {
 						// if there is a position of a player to draw
 						if (allowedPos[i][j] != GameLogic.EMPTY) {
-							// drawing hypothetical positions
+							// drawing hypothetic positions
 							this.drawPosition(i, j, allowedPos[i][j], false);
 						}
 					}

@@ -67,7 +67,6 @@ public class GameLogicImpl implements GameLogic {
 				}
 			}
 		}
-		System.out.print(player+" is blocked\n");
 		return allowCount == 0;
 	}
 
@@ -76,9 +75,7 @@ public class GameLogicImpl implements GameLogic {
 	 * @return
 	 */
 	public boolean isFinished() {
-		if(isBlockedPlayer(PLAYER_ONE) && isBlockedPlayer(PLAYER_TWO)){
-			System.out.print("neither player can play");
-		}
+		
 		return (isBlockedPlayer(PLAYER_ONE) && isBlockedPlayer(PLAYER_TWO));
 	}
 

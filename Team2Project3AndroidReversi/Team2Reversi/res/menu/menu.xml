@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu  xmlns:android="http://schemas.android.com/apk/res/android">
-	<item android:id="@+id/restart" android:title="@string/restart_label" android:alphabeticShortcut="@string/restart_shortcut" />
-	<item android:id="@+id/settings" android:title="@string/settings_label" android:alphabeticShortcut="@string/settings_shortcut" />
-	<item android:id="@+id/undo" android:title="@string/undo_label" android:alphabeticShortcut="@string/undo_shortcut"></item>
-	<item android:id="@+id/redo" android:title="@string/redo_label" android:alphabeticShortcut="@string/redo_shortcut"></item>
-	<item android:id="@+id/Stats" android:title="@string/stats_label" android:alphabeticShortcut="@string/stats_shortcut"></item>
-	<item android:id="@+id/exit" android:title="@string/exit_label" android:alphabeticShortcut="@string/exit_shortcut"></item>
-	
-	
-	
+	<item android:id="@+id/restart"
+		android:title="@string/restart_label"
+		android:alphabeticShortcut="@string/restart_shortcut"/>
+	<item android:id="@+id/settings"
+		android:title="@string/settings_label"
+		android:alphabeticShortcut="@string/settings_shortcut"/>
 </menu>

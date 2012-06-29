@@ -76,7 +76,7 @@ public class GameReversi {
 	//done? this will probably cause of crash
 	public Vector<Pair> GetValidMoves(Square player) {
 		int size = mBoard.size();
-		Vector<Pair> v = null;
+		Vector<Pair> v = new Vector<Pair>();
 		for(int y = 0; y != size; ++y) {
 			for(int x = 0; x != size; ++x) {
 				if(IsValidMove(x,y,player) == true) {
@@ -326,8 +326,7 @@ public class GameReversi {
 	//this may not work as well, I don't know if that's a deep
 	//or shallow copy
 	public void SetSquare(int x, int y, Square player) {
-		Square temp = mBoard.elementAt(y).elementAt(x);
-		temp = player;
+		player = mBoard.elementAt(y).elementAt(x);
 	}
 	
 }

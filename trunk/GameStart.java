@@ -1,5 +1,3 @@
-package csce315.game.reversi;
-
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -103,7 +101,28 @@ class gameStart {
 
 	// << override for Reversi object board outlay
 	void printReversi(GameReversi r) {
-
+		
+		System.out.print("  ");
+		for(int i = 0; i != r.size; ++i) {
+			System.out.print("_ ");
+		}
+		System.out.print("\n");
+		
+		for(int i = 0; i != r.size; ++i) {
+			System.out.print(i + "|");
+			for(int j = 0; j != r.size; ++j) {
+				switch(r.mBoard.elementAt(j).elementAt(i)) {
+				case empty: System.out.print("_|"); break;
+				case player1: System.out.print("O|"); break;
+				case player2: System.out.print("@|"); break;
+				default: System.out.print("!|"); break;
+				}
+			}
+			System.out.print('\n');
+		}
+		
+		System.out.print("  a b c d e f g h \n");
+		
 	}
 
 	// Returns true if the string can be converted to integers
@@ -580,7 +599,7 @@ class gameStart {
 		for(int i=0;i<40;i++) System.out.print('\n');
 		System.out.print("WELCOME\n");
 		while(true) {
-
+			
 			if(handlePregameInput(client) == 0){return 0;}
 
 			System.out.print("Player1: ");

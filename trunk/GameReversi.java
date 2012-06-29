@@ -1,5 +1,3 @@
-package csce315.game.reversi;
-
 import java.util.Stack;
 import java.util.Vector;
 
@@ -13,7 +11,24 @@ public class GameReversi {
 	public Stack<Vector<Vector<Square>>> boardRedos;
 	public int size;
 	
-	public GameReversi(int size) {
+	public GameReversi(int sizeInput) {
+		
+		mBoard = new Vector<Vector<Square>>();
+		
+		size = sizeInput;
+		
+		for(int i = 0; i < size; i++) {
+			Vector<Square> blank = new Vector<Square>();
+			for(int j = 0; j < size; j++) {
+				blank.add(Square.empty);	
+			}
+			mBoard.add(blank);
+		}
+		
+		
+		boardHistory = new Stack<Vector<Vector<Square>>>();
+		boardRedos = new Stack<Vector<Vector<Square>>>();
+		
 		int x = size / 2 - 1;
 		int y = size / 2 - 1;
 		SetSquare(x, y, Square.player1);
@@ -322,11 +337,10 @@ public class GameReversi {
 	}
 	
 	
-	//can't simply do: mBoard.elementAt(y).elementAt(x) = player
-	//this may not work as well, I don't know if that's a deep
-	//or shallow copy
 	public void SetSquare(int x, int y, Square player) {
-		player = mBoard.elementAt(y).elementAt(x);
+		
+		mBoard.elementAt(y).set(x, player);
+
 	}
 	
 }

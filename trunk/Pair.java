@@ -1,5 +1,3 @@
-package csce315.game.reversi;
-
 public class Pair {
 
 	private	int _x;

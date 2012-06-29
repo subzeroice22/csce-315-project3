@@ -20,7 +20,4 @@
 	<string name="stats_label">Game Statistics</string>
 	<string name="stats_shortcut">Stats</string>
 	<string name="select_difficulty">Select the desired difficulty</string>
-	<string name="easy_difficulty">Easy</string>
-	<string name="medium_difficulty">Medium</string>
-	<string name="hard_difficulty">Hard</string>
 </resources>

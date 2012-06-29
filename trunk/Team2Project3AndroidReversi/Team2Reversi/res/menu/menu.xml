@@ -6,4 +6,5 @@
 	<item android:id="@+id/settings"
 		android:title="@string/settings_label"
 		android:alphabeticShortcut="@string/settings_shortcut"/>
+	<item android:id="@+id/Stats" android:title="@string/stats_label" android:alphabeticShortcut="@string/stats_shortcut"></item>
 </menu>

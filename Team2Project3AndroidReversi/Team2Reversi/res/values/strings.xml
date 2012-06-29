@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="app_name">Reversi</string>
-	<string name="p1">Blue</string>
-	<string name="p2">Red</string>
+	<string name="p1">White</string>
+	<string name="p2">Black</string>
 	<string name="settings_label">Settings&#8230;</string>
 	<string name="show_hints">Show allowed positions</string>
 	<string name="settings_shortcut">s</string>

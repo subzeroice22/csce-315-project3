@@ -18,6 +18,7 @@ public final class R {
         public static final int icon=0x7f020001;
     }
     public static final class id {
+        public static final int Stats=0x7f080007;
         public static final int gameBoard=0x7f080004;
         public static final int restart=0x7f080005;
         public static final int settings=0x7f080006;
@@ -35,12 +36,9 @@ public final class R {
     public static final class string {
         public static final int app_name=0x7f060000;
         public static final int confirm_title=0x7f060009;
-        public static final int easy_difficulty=0x7f060013;
         public static final int game_finished=0x7f06000d;
-        public static final int hard_difficulty=0x7f060015;
         public static final int is_droid_opponent=0x7f06000e;
         public static final int is_droid_opponent_description=0x7f06000f;
-        public static final int medium_difficulty=0x7f060014;
         public static final int new_game_msg=0x7f06000c;
         public static final int no_caption=0x7f06000b;
         public static final int p1=0x7f060001;

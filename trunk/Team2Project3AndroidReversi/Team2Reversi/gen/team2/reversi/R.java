@@ -48,6 +48,8 @@ public final class R {
         public static final int settings_shortcut=0x7f060005;
         public static final int show_hints=0x7f060004;
         public static final int show_hints_description=0x7f060008;
+        public static final int stats_label=0x7f060010;
+        public static final int stats_shortcut=0x7f060011;
         public static final int yes_caption=0x7f06000a;
     }
     public static final class xml {

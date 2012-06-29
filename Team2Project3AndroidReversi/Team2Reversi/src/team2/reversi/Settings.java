@@ -1,6 +1,7 @@
 package team2.reversi;
 
 import android.content.Context;
+//import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
@@ -23,6 +24,11 @@ public class Settings extends PreferenceActivity {
 	 * This key is used to know if is selected 1 or 2 players
 	 */
 	private static final String IS_DROID_OPPONENT = "is_droid_opponent";
+	
+	/**
+	 * This key is used to know if is selected 1 or 2 players
+	 */
+//	private static final String DIFFICULTY = "levels";
 
 	// ///////////////////// OVERRIDES //////////////////////////////////////
 	/**
@@ -37,6 +43,24 @@ public class Settings extends PreferenceActivity {
 
 	// ///////////////////// ACCESSORS ///////////////////////////////////////
 
+	
+/*	public enum Difficulty {
+	        Easy(5),
+	        Medium(3),
+	        Hard(1);
+	        
+	        private final int depth;
+	        
+	        Difficulty(int maxdepth){
+	        	depth=maxdepth;
+	        }
+	        public int getDepth(){
+	        	return depth;
+	        }
+	}*/
+	
+
+    
 	/**
 	 * Get the 'show allowed positions' setting
 	 */
@@ -54,5 +78,14 @@ public class Settings extends PreferenceActivity {
 		return PreferenceManager.getDefaultSharedPreferences(context)
 				.getBoolean(IS_DROID_OPPONENT, true);
 	}
+/*    public static Difficulty getDifficulty(Context context) {
+        final SharedPreferences preferences =
+                PreferenceManager.getDefaultSharedPreferences(context);
+        final String diffic = preferences
+                .getString(DIFFICULTY, DEFAULT_DIFFICULTY.toString());
+        return Difficulty.valueOf(diffic);
+    }
+    
+    public static final Difficulty DEFAULT_DIFFICULTY = Difficulty.Medium;*/
 
 }

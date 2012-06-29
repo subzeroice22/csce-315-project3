@@ -20,4 +20,11 @@
 	<string name="stats_label">Game Statistics</string>
 	<string name="stats_shortcut">Stats</string>
 	<string name="select_difficulty">Select the desired difficulty</string>
+	<string name="starting_score">2</string>
+	<string name="undo_label">Undo</string>
+	<string name="undo_shortcut">un</string>
+	<string name="redo_label">Redo</string>
+	<string name="redo_shortcut">re</string>
+	<string name="exit_label">Exit</string>
+	<string name="exit_shortcut">ex</string>
 </resources>

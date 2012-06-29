@@ -1,5 +1,3 @@
-package csce315.game.reversi;
-
 import java.util.Vector;
 
 class Global {

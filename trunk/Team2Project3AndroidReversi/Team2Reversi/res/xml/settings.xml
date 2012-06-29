@@ -12,11 +12,7 @@
   	android:summary="@string/is_droid_opponent_description"
   	android:defaultValue="true"/>
   <ListPreference
-    android:title="Difficulty"
-    android:summary="Select the difficulty level of the AI"
-    android:key="listPref"
-    android:defaultValue="easy"
+  	
   	android:entries="@array/levels"
-   	android:entryValues="@array/levels"
-  />
+  />	
 </PreferenceScreen>

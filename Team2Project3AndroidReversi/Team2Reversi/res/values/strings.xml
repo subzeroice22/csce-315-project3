@@ -19,4 +19,8 @@
 	<string name="is_droid_opponent_description">Turn it on to play against Android. Turn it off to play against Human.</string>
 	<string name="stats_label">Game Statistics</string>
 	<string name="stats_shortcut">Stats</string>
+	<string name="select_difficulty">Select the desired difficulty</string>
+	<string name="easy_difficulty">Easy</string>
+	<string name="medium_difficulty">Medium</string>
+	<string name="hard_difficulty">Hard</string>
 </resources>

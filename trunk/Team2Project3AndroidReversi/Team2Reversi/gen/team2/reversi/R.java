@@ -19,12 +19,12 @@ public final class R {
         public static final int icon=0x7f020001;
     }
     public static final class id {
-        public static final int Stats=0x7f080009;
-        public static final int exit=0x7f08000a;
+        public static final int exit=0x7f080009;
         public static final int gameBoard=0x7f080004;
         public static final int redo=0x7f080008;
         public static final int restart=0x7f080005;
         public static final int settings=0x7f080006;
+        public static final int stats=0x7f08000a;
         public static final int txtPlayer1=0x7f080000;
         public static final int txtPlayer1Counter=0x7f080001;
         public static final int txtPlayer2=0x7f080002;

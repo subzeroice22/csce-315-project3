@@ -2,7 +2,9 @@ package team2.reversi;
 
 /**
  * This listener will be notified when the score changes
- * @author Fernando Cherchi
+ * Based upon Android Open Source code from Fernando Cherchi
+ * Team2 Coders: Laramie Goode, Curtis Franks, Chris Voss
+ *
  */
 public interface GameEventsListener {
 	

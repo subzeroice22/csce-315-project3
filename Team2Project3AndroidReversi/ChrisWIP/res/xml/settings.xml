@@ -11,8 +11,10 @@
   	android:title="@string/is_droid_opponent"
   	android:summary="@string/is_droid_opponent_description"
   	android:defaultValue="true"/>
-  <ListPreference
-  	android:key="difficulty_level"
-  	android:entries="@array/levels"
-  android:entryValues="@array/level_values"/>	
+  <ListPreference 
+      android:entries="@array/levels" 
+      android:entryValues="@array/level_values" 
+      android:key="@string/select_difficulty" 
+      android:title="@string/difficulty_title" 
+      android:summary="@string/difficulty_message"/>	
 </PreferenceScreen>

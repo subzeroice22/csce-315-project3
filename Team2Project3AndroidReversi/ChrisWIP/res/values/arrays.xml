@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string-array name="levels">
+		<item>@string/easy_label</item>
+		<item>@string/medium_label</item>
+		<item>@string/hard_label</item>
+</string-array>
+<string-array name="level_values">
+    <item >@string/easy_value</item>
+    <item >@string/medium_value</item>
+    <item >@string/hard_value</item>
+</string-array>
+</resources>

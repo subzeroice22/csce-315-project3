@@ -6,7 +6,8 @@ import team2.reversi.GameLogic;
 
 /**
  * The thread for the machine thinking
- * @author Fernando Cherchi
+ * Based upon Android Open Source code from Fernando Cherchi
+ * Team2 Coders: Laramie Goode, Curtis Franks, Chris Voss
  *
  */
 public class MachineThread implements Runnable {

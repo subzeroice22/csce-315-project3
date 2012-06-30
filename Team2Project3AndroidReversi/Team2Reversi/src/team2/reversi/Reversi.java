@@ -48,7 +48,7 @@ public class Reversi extends Activity implements GameEventsListener,
 
 		super.onCreate(savedInstanceState);
 
-		this.setTitle("Rever-droid");
+		this.setTitle("Team 2 Reversi");
 		this.setContentView(R.layout.main);
 
 		// retrieving the old facade if any

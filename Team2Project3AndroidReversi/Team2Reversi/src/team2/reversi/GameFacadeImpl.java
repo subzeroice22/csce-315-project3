@@ -1,10 +1,10 @@
 package team2.reversi;
 
+import team2.reversi.GameFacade;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 import team2.reversi.GameEventsListener;
-import team2.reversi.GameFacade;
 import team2.reversi.GameLogic;
 
 /**

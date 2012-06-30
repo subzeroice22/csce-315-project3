@@ -3,7 +3,7 @@
 	<string name="app_name">Reversi</string>
 	<string name="p1">White</string>
 	<string name="p2">Black</string>
-	<string name="settings_label">Settings...</string>
+	<string name="settings_label">Settings&#8230;</string>
 	<string name="show_hints">Show allowed positions</string>
 	<string name="settings_shortcut">s</string>
 	<string name="restart_label">Start a new game</string>
@@ -17,5 +17,20 @@
 	<string name="game_finished">The winner is player %s. Do you want to start again?</string>
 	<string name="is_droid_opponent">Play against droid?</string>
 	<string name="is_droid_opponent_description">Turn it on to play against Android. Turn it off to play against Human.</string>
-	
+	<string name="stats_label">Game Statistics</string>
+	<string name="stats_shortcut">Stats</string>
+	<string name="select_difficulty">Select the desired difficulty</string>
+	<string name="starting_score"> 2</string>
+	<string name="undo_label">Undo</string>
+	<string name="undo_shortcut">un</string>
+	<string name="redo_label">Redo</string>
+	<string name="redo_shortcut">re</string>
+	<string name="exit_label">Exit</string>
+	<string name="exit_shortcut">ex</string>
+	<string name="easy_label">Easy</string>
+	<string name="medium_label">Medium</string>
+	<string name="hard_label">Hard</string>
+	<string name="easy_value">0</string>
+	<string name="medium_value">1</string>
+	<string name="hard_value">2</string>
 </resources>

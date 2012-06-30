@@ -66,13 +66,13 @@ public class GameBoard extends View {
 	/**
 	 * The color used by the player 1
 	 */
-	private int playerOneColor = Color.BLUE;
+	private int playerOneColor = Color.WHITE;
 	private int playerOneInsideColor = Color.rgb(0, 0, 150);
 
 	/**
 	 * Color used by player 2
 	 */
-	private int playerTwoColor = Color.RED;
+	private int playerTwoColor = Color.BLACK;
 	private int playerTwoInsideColor = Color.rgb(150, 0, 0);
 
 	/**

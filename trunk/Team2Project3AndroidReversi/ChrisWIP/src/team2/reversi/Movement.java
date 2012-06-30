@@ -2,7 +2,8 @@ package team2.reversi;
 
 /**
  * This class represents a movement (which is column, row and player)
- * @author Fernando Cherchi
+ * Based upon Android Open Source code from Fernando Cherchi
+ * Team2 Coders: Laramie Goode, Curtis Franks, Chris Voss
  *
  */
 public class Movement {

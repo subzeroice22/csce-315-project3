@@ -5,9 +5,9 @@ import team2.reversi.GameLogic;
 
 /**
  * Validates matrix possibilities for the users
- * 
- * @author Fernando Cherchi
- * 
+ * Based upon Android Open Source code from Fernando Cherchi
+ * Team2 Coders: Laramie Goode, Curtis Franks, Chris Voss
+ *
  */
 public class MatrixChecker {
 

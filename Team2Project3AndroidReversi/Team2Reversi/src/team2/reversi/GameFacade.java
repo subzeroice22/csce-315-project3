@@ -77,5 +77,6 @@ public interface GameFacade {
 	 */
 	public boolean getMachineOpponent();
 
-
+	public void setDifficulty(String difficulty);
+	public String getDifficulty();
 }

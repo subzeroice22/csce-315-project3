@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent" android:padding="25dip">
-
+	<TextView android:text="@string/difficulty_level" android:id="@+id/difficulty_level"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 	<LinearLayout android:orientation="horizontal"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"
 		android:paddingRight="25dip">
@@ -18,9 +19,10 @@
 			android:layout_height="wrap_content"></TextView>
 	</LinearLayout>
 	<team2.reversi.GameBoard
-		android:id="@+id/gameBoard" android:layout_width="wrap_content"
+		android:id="@+id/gameBoard" 
+		android:layout_weight="0"		
+		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_gravity="top"
-		android:layout_weight="0"/>
+		android:layout_gravity="top"/>
 	
 </LinearLayout>

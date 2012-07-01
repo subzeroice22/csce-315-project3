@@ -33,4 +33,8 @@
 	<string name="easy_value">0</string>
 	<string name="medium_value">1</string>
 	<string name="hard_value">2</string>
+	<string name="difficulty_title">Difficulty</string>
+	<string name="difficulty_summary">Chose the difficulty at which the AI will play.</string>
+	<string name="difficulty_level">Easy</string>
+	<string name="show_allowed_positions">show allowed postions?</string>
 </resources>

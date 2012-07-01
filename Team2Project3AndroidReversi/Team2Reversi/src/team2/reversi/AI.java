@@ -2,8 +2,6 @@ package team2.reversi;
 
 import java.util.List;
 
-//import GameLogic;
-
 public class AI {
 
 	// ///////////////////// CONSTANTS ///////////////////////////////////
@@ -37,6 +35,14 @@ public class AI {
 	/**
 	 * The number of movements the machine will go further
 	 */
+    //********************this is a HIGH priority task*****************************
+    //TODO Adjust the AI difficulty based on the ListPreferences user selection.
+	//While displaying the correct difficulty level on the main.xml is cool, it is 
+    //more important that we figure out how to set this depth integer to the values
+    //of 0, 1, or 2 depending on what the user selects from the ListPreferences
+	//menu.  See GameFacadeImpl.java for my attempt at getters and setters for a
+	//game difficultyLevel
+    //********************this is a HIGH priority task*****************************
 	private int depth = 2;
 
 	/**

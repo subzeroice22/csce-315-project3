@@ -24,6 +24,12 @@ public class Settings extends PreferenceActivity {
 	 */
 	private static final String IS_DROID_OPPONENT = "is_droid_opponent";
 
+	/**
+	 * This key is used to know the difficulty of the AI
+	 */
+	
+	private static final String DIFFICULTY_LEVEL = "difficulty_level";
+	
 	// ///////////////////// OVERRIDES //////////////////////////////////////
 	/**
 	 * adding preferences from res
@@ -54,5 +60,18 @@ public class Settings extends PreferenceActivity {
 		return PreferenceManager.getDefaultSharedPreferences(context)
 				.getBoolean(IS_DROID_OPPONENT, true);
 	}
+	
+    //********************this is a low priority task*****************************
+    //TODO we might need setter and getters for difficultyLevel
+	//I'm not sure how this is supposed to work, but I also have a displayDifficulty()
+	//in GuiUpdater.java which is attempting to get the Difficulty and set the 
+	//@string/difficulty_level all in the same function.
+    //I think the one in GuiUpdater.java is closer to correct.
+    //********************this is a low priority task*****************************
+	public static String getDifficulty(Context context){
+		return PreferenceManager.getDefaultSharedPreferences(context)
+				.getString(DIFFICULTY_LEVEL,"2");
+	}
+	
 
 }

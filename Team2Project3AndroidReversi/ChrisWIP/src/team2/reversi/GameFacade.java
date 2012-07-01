@@ -69,9 +69,6 @@ public interface GameFacade {
 	 * If true the game is against droid, otherwise against human
 	 * @param isDroid
 	 */
-	
-	public void setDifficulty(String difficulty);
-	
 	public void setMachineOpponent(boolean machineOpponent);
 	
 	/**
@@ -80,5 +77,6 @@ public interface GameFacade {
 	 */
 	public boolean getMachineOpponent();
 
-
+	public void setDifficulty(String difficulty);
+	public String getDifficulty();
 }

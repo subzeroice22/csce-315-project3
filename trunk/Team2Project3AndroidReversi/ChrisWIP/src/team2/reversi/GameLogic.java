@@ -29,9 +29,16 @@ public interface GameLogic {
 	 */
 	boolean canSet (int player, int col, int row);
 	
+	/**
+	 * returns the string equivalent of the current difficulty level
+	 */
+//	public String getDifficulty();
 	
-	public String getDifficulty();
-	public void setDifficulty(String difficulty);
+	/**
+	 * sets the difficulty of the game.
+	 * @param difficulty
+	 */
+//	public void setDifficulty(String difficulty);
 	
 	/**
 	 * Sets the given chip in the given cell

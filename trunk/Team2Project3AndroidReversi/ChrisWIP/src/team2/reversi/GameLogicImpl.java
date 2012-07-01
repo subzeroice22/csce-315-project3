@@ -129,14 +129,6 @@ public class GameLogicImpl implements GameLogic {
 		}
 		return mobility;
 	}
-
-	private String Difficulty;
-	public String getDifficulty(){
-		return this.Difficulty;
-	}
-	public void setDifficulty(String difficulty){
-		this.Difficulty=difficulty;
-	}
 	
 	/**
 	 * Conquers the positions in all directions (if the player is enclosing opponent pieces, 

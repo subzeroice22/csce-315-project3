@@ -32,7 +32,10 @@ public class GameFacadeImpl implements GameFacade {
 	 */
 	private boolean isMachineOpponent = true;
 	
-	
+	/**
+	 * Indicates if we are in 1 player mode or 2 player mode
+	 */
+	private String difficultyLevel = "Easy";	
 	
 
 	// /////////////////////// PUBLIC METHODS //////////////////////////
@@ -53,7 +56,9 @@ public class GameFacadeImpl implements GameFacade {
 	public void set(int player, int col, int row) {
 
 		boolean playerHasChanged;
-
+		//if the next player has no move then doMove will perform the move
+		//and then return false so that playerhasChanged becomes false.
+		//otherwise, playerHasChanged will become true.
 		playerHasChanged = this.doMovement(player, col, row);
 		// if is the machine moment...
 		if (this.isMachineOpponent && playerHasChanged && 
@@ -66,23 +71,7 @@ public class GameFacadeImpl implements GameFacade {
 			secondThread.setGameLogic(this.gameLogic);
 			
 			ExecutorService threadExecutor = Executors.newSingleThreadExecutor();
-			threadExecutor.execute(secondThread);
-			
-			
-			
-//			do {
-//				Movement machineMovement = this.machinePlays();
-//				if (machineMovement != null) {
-//					playerHasChanged = this.doMovement(GameLogic.PLAYER_TWO,
-//							machineMovement.getColumn(), machineMovement
-//									.getRow());
-//				} else {
-//					//if machine movement is null.. machine cannot play 
-//					playerHasChanged = true;
-//				}
-//				// it can happen that the human can not play...
-//			} while (!playerHasChanged);
-//			
+			threadExecutor.execute(secondThread);	
 			
 		}
 
@@ -100,6 +89,11 @@ public class GameFacadeImpl implements GameFacade {
 	/**
 	 * Gets the current matrix of the game
 	 */
+    //********************this is a HIGH priority task*****************************
+    //TODO Undo:Redo 
+	//This getGameMatrix returns the current game board.  Perhaps the undo and
+	//redo can work with a tack of these.
+    //********************this is a HIGH priority task*****************************
 	@Override
 	public int[][] getGameMatrix() {
 		return this.gameLogic.getGameMatrix();
@@ -142,7 +136,6 @@ public class GameFacadeImpl implements GameFacade {
 	 */
 	private void notifyChanges() {
 		if (this.gameEventsListener != null) {
-
 			int p1 = this.gameLogic.getCounterForPlayer(PLAYER_ONE);
 			int p2 = this.gameLogic.getCounterForPlayer(PLAYER_TWO);
 
@@ -174,10 +167,10 @@ public class GameFacadeImpl implements GameFacade {
 		// if the next player can play (has at least one place to put the
 		// chip)
 		if (!this.gameLogic.isBlockedPlayer(GameUtils.opponent(current))) {
-			// just toggles
+			// just switches to the next player
 			this.gameLogic.setCurrentPlayer(GameUtils.opponent(current));
 			toggled = true;
-		} else {
+		} else {//if the next player can't play
 			System.out.println(String.format(
 					"player %d cannot play!!!!!!!!!!!!!!!!!!!", GameUtils
 							.opponent(current)));
@@ -248,11 +241,24 @@ public class GameFacadeImpl implements GameFacade {
 	public boolean getMachineOpponent() {
 		return this.isMachineOpponent;
 	}
-
-
+    //********************this is a HIGH priority task*****************************
+    //TODO we might need a setter and getter for difficultyLevel
+	//I thought that maybe we needed a setter and getter in here, but I'm not even
+    //sure if these are necessary or correct.
+	//Since GameFacadeImpl.java implements GameFacade.java I had to declare the
+	//below functions in GameFacade.java
+    //********************this is a HIGH priority task*****************************
+	/**
+	 * sets the difficulty level in the gameLogic
+	 */
 	public void setDifficulty(String Difficulty) {
-		this.gameLogic.setDifficulty(Difficulty);
-		
+		this.difficultyLevel = Difficulty;
+	}
+	/**
+	 * gets if the opponent is droid
+	 */
+	public String getDifficulty() {
+		return this.difficultyLevel;
 	}
 
 }

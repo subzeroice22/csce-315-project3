@@ -10,11 +10,14 @@ public interface GameEventsListener {
 	
 	/**
 	 * Invoked when the score changes
+	 * @param difficulty
 	 * @param p1Score
 	 * @param p2Score
 	 */
 	void onScoreChanged(int p1Score, int p2Score);
 	
+	
+//	void onDifficultyChanged(String difficulty);	
 	/**
 	 * Invoked when the game has been finished
 	 * @param winner

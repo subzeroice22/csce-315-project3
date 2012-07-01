@@ -129,7 +129,6 @@ public class GameLogicImpl implements GameLogic {
 		}
 		return mobility;
 	}
-
 	
 	/**
 	 * Conquers the positions in all directions (if the player is enclosing opponent pieces, 

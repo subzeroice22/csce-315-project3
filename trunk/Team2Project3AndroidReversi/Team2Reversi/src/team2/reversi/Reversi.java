@@ -59,6 +59,7 @@ public class Reversi extends Activity implements GameEventsListener,
 			this.gameFacade = new GameFacadeImpl();
 			this.gameFacade.setMachineOpponent(Settings.getIsDroidOpponent(getBaseContext()));
 			this.gameFacade.setGameLogic(new GameLogicImpl(new Board()));
+//			this.gameFacade.setDifficulty(Settings.getDifficulty(getBaseContext()));
 		} else {
 			this.refreshCounters();
 		}
@@ -96,6 +97,34 @@ public class Reversi extends Activity implements GameEventsListener,
 		case R.id.restart:
 			this.showNewGameConfirmation(super.getResources().getString(
 					R.string.new_game_msg));
+			break;
+		case R.id.exit:
+			finish();
+		case R.id.undo:
+		    //********************this is a HIGH priority task*****************************
+		    //TODO Implement an undo function.
+			//We need to set the gameBoard one level back if playing against another human (no AI)
+		    //or set the gameBoard back two versions if playing against the AI as the AI will have
+		    //already made another board...
+		    //********************this is a HIGH priority task*****************************
+			break;
+		case R.id.redo:
+		    //********************this is a HIGH priority task*****************************
+		    //TODO Implement a redo function.
+			//We need to set the gameBoard forward one level, reseting to the gameBoard before
+		    //the undo.  If playing against the AI we need to set the gameBoard forward the two
+		    //levels we had undone.
+		    //********************this is a HIGH priority task*****************************
+			break;
+		case R.id.stats:
+		    //********************this is a HIGH priority task*****************************
+		    //TODO Implement a statsHander class.
+			//We need to read the stats.txt file from the SD Card and display the high
+		    //scores for each difficulty of play.  The stats for each record setting game should
+		    //include {Difficulty, Winning Differential, Length of Game, Date/Time}
+			//See also: onGameFinished() for notes on writing high scores to SD Card
+		    //********************this is a HIGH priority task*****************************
+			break;
 		default:
 			return false;
 		}
@@ -125,15 +154,14 @@ public class Reversi extends Activity implements GameEventsListener,
 	}
 
 	/**
-	 * Occurs when the score has changed... so refrewhing counters
+	 * Occurs when the score has changed... so refreshing counters
 	 */
 	@Override
 	public void onScoreChanged(int p1Score, int p2Score) {
-		
 		GuiUpdater updater = new GuiUpdater(p1Score, p2Score, this);
 		this.handler.post(updater);
 	}
-
+	
 	/**
 	 * Occurs when the game has finished
 	 */
@@ -149,18 +177,25 @@ public class Reversi extends Activity implements GameEventsListener,
 		
 		this.handler.post(new MessageBoxShower(String.format(super.getResources()
 				.getString(R.string.game_finished, playerName)), this, this));
+	    //********************this is a HIGH priority task*****************************
+	    //TODO We need to read the high scores and compare the scores at this game's Difficulty
+	    //to see if a new record has been made.  If so, we need to replace the old record
+	    //with the new one in the stats.txt file.  My idea is to have six High Scores in the
+		//stats.txt, a Piece Differential Champ, and a Speed Champ for each level of 
+		//difficulty.
+	    //********************this is a HIGH priority task*****************************
 	}
 
+	
 	// ///////////////////////// PRIVATE METHODS ///////////////////////////////
 
-	
-	
 	/**
 	 * Restarts the facade and the graphics
 	 */
 	private void restart() {
 		this.gameFacade.restart();
 		this.gameFacade.setMachineOpponent(Settings.getIsDroidOpponent(getBaseContext()));
+		this.gameFacade.setDifficulty(Settings.getDifficulty(getBaseContext()));
 		this.refreshCounters();
 		GameBoard gameBoard = (GameBoard) this.findViewById(R.id.gameBoard);
 		gameBoard.invalidate();

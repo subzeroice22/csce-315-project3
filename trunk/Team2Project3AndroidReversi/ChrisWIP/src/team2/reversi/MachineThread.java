@@ -62,7 +62,6 @@ public class MachineThread implements Runnable {
 	 * @return
 	 */
 	private Movement machinePlays() {
-//		String s=this.gameLogic.getDifficulty();
 		AI ai = new AI(this.gameLogic.getBoard());
 		Movement best = ai.getBestMove(GameLogic.PLAYER_TWO);
 		return best;
@@ -95,7 +94,6 @@ public class MachineThread implements Runnable {
 	 */
 	private void notifyChanges() {
 		if (this.gameEventsListener != null) {
-
 			int p1 = this.gameLogic.getCounterForPlayer(GameLogic.PLAYER_ONE);
 			int p2 = this.gameLogic.getCounterForPlayer(GameLogic.PLAYER_TWO);
 

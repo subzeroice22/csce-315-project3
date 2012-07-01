@@ -65,7 +65,4 @@ public class ConfirmationDialog {
 		builder.show();
 	}
 	
-	
-	
-
 }

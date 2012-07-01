@@ -6,6 +6,7 @@ package team2.reversi;
 //import Board;
 //import GameFacadeImpl;
 //import GameLogicImpl;
+import team2.reversi.Statistics;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -15,6 +16,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuInflater;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class Reversi extends Activity implements GameEventsListener,
@@ -70,6 +73,15 @@ public class Reversi extends Activity implements GameEventsListener,
 
 		GameBoard gameBoard = (GameBoard) this.findViewById(R.id.gameBoard);
 		gameBoard.setGameFacade(this.gameFacade);
+		
+		Button stats = (Button) findViewById(R.id.stats);
+/*		stats.setOnClickListener(new OnClickListener() {
+			 @Override
+			 public void onClick(View v)
+			 {
+				 showSimplePopUp();
+			 }
+		});*/
 
 	}
 
@@ -124,6 +136,7 @@ public class Reversi extends Activity implements GameEventsListener,
 		    //include {Difficulty, Winning Differential, Length of Game, Date/Time}
 			//See also: onGameFinished() for notes on writing high scores to SD Card
 		    //********************this is a HIGH priority task*****************************
+			this.showSimplePopUp();
 			break;
 		default:
 			return false;
@@ -232,5 +245,22 @@ public class Reversi extends Activity implements GameEventsListener,
 		ConfirmationDialog cd = new ConfirmationDialog(this);
 		cd.showConfirmation(this, message);
 	}
+	 private void showSimplePopUp() {
+			
+		  AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
+		  helpBuilder.setTitle("High Scores");
+		  helpBuilder.setMessage("This string will consist of six high scores: a piece differential champ and a speed champ for each level of difficulty.");
+		  helpBuilder.setPositiveButton("Ok",
+		    new DialogInterface.OnClickListener() {
+		
+		     public void onClick(DialogInterface dialog, int which) {
+		      // Do nothing but close the dialog
+		     }
+		    });
+		
+		  // Remember, create doesn't show the dialog
+		  AlertDialog helpDialog = helpBuilder.create();
+		  helpDialog.show();
+		  }
 
 }

@@ -9,5 +9,10 @@
 	<item android:id="@+id/undo" android:alphabeticShortcut="@string/undo_shortcut" android:title="@string/undo_label"></item>
 	<item android:id="@+id/redo" android:alphabeticShortcut="@string/redo_shortcut" android:title="@string/redo_label"></item>
 	<item android:id="@+id/exit" android:alphabeticShortcut="@string/exit_shortcut" android:title="@string/exit_label"></item>
-	<item android:id="@+id/stats" android:alphabeticShortcut="@string/stats_shortcut" android:title="@string/stats_label"></item>
+	
+	<item android:id="@+id/stats" 
+	    android:alphabeticShortcut="@string/stats_shortcut" 
+	    android:title="@string/stats_label">
+	    
+	</item>
 </menu>

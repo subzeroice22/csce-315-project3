@@ -1,5 +1,7 @@
 package team2.reversi;
 
+import java.util.Date;
+
 public interface GameFacade {
 	
 	/**
@@ -10,6 +12,10 @@ public interface GameFacade {
 	public static int PLAYER_TWO = 2;
 	
 	public static int NONE = 0;
+	
+	public static long START_TIME = 0;
+	
+	public static long STOP_TIME = 0;
 	
 	/**
 	 * starts a new game
@@ -79,4 +85,12 @@ public interface GameFacade {
 
 	public void setDifficulty(String difficulty);
 	public String getDifficulty();
+	public void setStartTime();
+	public long getStartTime();
+	public void setStopTime();
+	public long getStopTime();
+	public int getWinningDifferential();
+	public void setWinningDifferential(int winningDifferential);
+	public void setGameTime();
+	public String getGameTime();
 }

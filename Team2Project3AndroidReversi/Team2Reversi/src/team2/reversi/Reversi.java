@@ -1,11 +1,17 @@
 package team2.reversi;
 
-//import team2.reversi.GameEventsListener;
-//import GameFacade;
-//import GameLogic;
-//import Board;
-//import GameFacadeImpl;
-//import GameLogicImpl;
+import team2.reversi.GameEventsListener;
+import team2.reversi.GameLogic;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 import team2.reversi.Statistics;
 
 import android.app.Activity;
@@ -15,6 +21,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.format.DateFormat;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +39,8 @@ public class Reversi extends Activity implements GameEventsListener,
 	 * Used to invoke the GUI operations (UI thread)
 	 */
 	private Handler handler;
+	
+	private List<Statistics> highScores = new ArrayList<Statistics>();
 
 	// ///////////////////////// LIFETIME /////////////////////////////////
 	
@@ -182,14 +191,23 @@ public class Reversi extends Activity implements GameEventsListener,
 	public void onGameFinished(int winner) {
 		
 		String playerName;
+
+		
+		int p1 = this.gameFacade.getScoreForPlayer(GameLogic.PLAYER_ONE);
+		int p2 = this.gameFacade.getScoreForPlayer(GameLogic.PLAYER_TWO);
+		
+		
 		if (winner == GameLogic.PLAYER_ONE) {
 			playerName = getResources().getString(R.string.p1);
+			this.gameFacade.setWinningDifferential(p1-p2);
 		} else {
 			playerName = getResources().getString(R.string.p2);
+			this.gameFacade.setWinningDifferential(p2-p1);
 		}
-		
+		this.gameFacade.setStopTime();
 		this.handler.post(new MessageBoxShower(String.format(super.getResources()
 				.getString(R.string.game_finished, playerName)), this, this));
+		
 	    //********************this is a HIGH priority task*****************************
 	    //TODO We need to read the high scores and compare the scores at this game's Difficulty
 	    //to see if a new record has been made.  If so, we need to replace the old record
@@ -212,6 +230,7 @@ public class Reversi extends Activity implements GameEventsListener,
 		this.refreshCounters();
 		GameBoard gameBoard = (GameBoard) this.findViewById(R.id.gameBoard);
 		gameBoard.invalidate();
+		this.gameFacade.setStartTime();
 	}
 
 	/**
@@ -249,7 +268,7 @@ public class Reversi extends Activity implements GameEventsListener,
 			
 		  AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
 		  helpBuilder.setTitle("High Scores");
-		  helpBuilder.setMessage("This string will consist of six high scores: a piece differential champ and a speed champ for each level of difficulty.");
+		  helpBuilder.setMessage(this.gameFacade.getDifficulty() + " " + this.gameFacade.getWinningDifferential()+" "+this.gameFacade.getGameTime());
 		  helpBuilder.setPositiveButton("Ok",
 		    new DialogInterface.OnClickListener() {
 		
@@ -263,4 +282,26 @@ public class Reversi extends Activity implements GameEventsListener,
 		  helpDialog.show();
 		  }
 
+	public List<Statistics> getHighScores() {
+		return highScores;
+	}
+
+	public void setHighScores(List<Statistics> highScores) {
+		this.highScores = highScores;
+	}
+	public void writeFile() {
+		try {
+			FileWriter write = new FileWriter("text.txt", true);
+			PrintWriter text = new PrintWriter(write);
+			text.println( this.gameFacade.getDifficulty() + " " + this.gameFacade.getWinningDifferential()+" "+this.gameFacade.getGameTime());
+			text.flush();
+			write.close();
+
+		} catch (IOException ioe)
+		// writes name from textfield(username) and score from board class
+		// into text document text.txt
+		{
+			ioe.printStackTrace();
+		}
+	}
 }

@@ -2,8 +2,14 @@ package team2.reversi;
 
 import team2.reversi.GameFacade;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import android.text.format.DateFormat;
+import android.text.format.Time;
 import team2.reversi.GameEventsListener;
 import team2.reversi.GameLogic;
 
@@ -36,6 +42,14 @@ public class GameFacadeImpl implements GameFacade {
 	 * Indicates if we are in 1 player mode or 2 player mode
 	 */
 	private String difficultyLevel = "Easy";	
+	
+	private long startTime;
+	
+	private long stopTime;
+	
+	private long gameTime;
+	
+	private int winningDifferential;
 	
 
 	// /////////////////////// PUBLIC METHODS //////////////////////////
@@ -259,6 +273,41 @@ public class GameFacadeImpl implements GameFacade {
 	 */
 	public String getDifficulty() {
 		return this.difficultyLevel;
+	}
+	public void setStartTime(){
+		this.startTime = System.currentTimeMillis();
+	}
+
+	public long getStartTime(){
+		return this.startTime;
+	}
+	public void setStopTime(){
+		this.stopTime = System.currentTimeMillis();
+	}
+	public long getStopTime(){
+		return this.stopTime;
+	}
+	
+	public void setGameTime(){
+		this.gameTime = this.stopTime-this.startTime;
+	}
+	
+	public String getGameTime(){
+	    // Create a DateFormatter object for displaying date in specified format.
+	    SimpleDateFormat formatter = new SimpleDateFormat("hh:mm:ss");
+
+	    // Create a calendar object that will convert the date and time value in milliseconds to date. 
+	     Calendar calendar = Calendar.getInstance();
+	     calendar.setTimeInMillis(this.stopTime-this.startTime);
+	     return formatter.format(calendar.getTime());
+	}
+
+	public int getWinningDifferential() {
+		return winningDifferential;
+	}
+
+	public void setWinningDifferential(int winningDifferential) {
+		this.winningDifferential = winningDifferential;
 	}
 
 }

@@ -57,6 +57,7 @@ public class GuiUpdater implements Runnable {
 	    String difficulty  = prefs.getString("difficulty_level", "Easy");
 		TextView txtP2 = (TextView) this.view.findViewById(R.id.difficulty_level);
 		txtP2.setText(String.format(" %s", difficulty));
+		
 	}
 
 	/**

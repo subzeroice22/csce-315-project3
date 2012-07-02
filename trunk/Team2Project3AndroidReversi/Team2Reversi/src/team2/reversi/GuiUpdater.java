@@ -11,7 +11,7 @@ import android.widget.TextView;
  * Team2 Coders: Laramie Goode, Curtis Franks, Chris Voss
  *
  */
-public class GuiUpdater implements Runnable {
+public class GuiUpdater implements Runnable{
 	private int score1;
 	private int score2;
 	private Activity view;
@@ -35,28 +35,29 @@ public class GuiUpdater implements Runnable {
 	@Override
 	public void run() {
 		this.setPlayersCounters(score1, score2);
-		this.displayDifficulty();
+		displayDifficulty();
 		GameBoard board = (GameBoard) this.view.findViewById(R.id.gameBoard);
 		board.drawPositions();
 		board.invalidate();
+		displayDifficulty();//a second time just to make sure.
+		
 	}
 
 	/**
 	 * Displays the difficulty level
 	 */
 	private void displayDifficulty() {
-	     SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(view);
+
 	    //********************this is a lower priority task*****************************
 	    //TODO Display Difficulty Level on main screen.
-	    //Team, I'm trying to get a value from the ListPreference in res\xml\settings.xml
-	    //so that we can update the value of the @string\diffuclty_level on the 
-	    //res\layout\main.xml
-	    //See GameFacadeImpl.java for my attempt at getters and setters for a
-	 	//game difficultyLevel
+	    //This is working somewhat.  I haven't had time to test it much, but I wanted
+		//to have it so that the user couldn't change difficulty during the game.  If the 
+		//user selected a difficulty before any moves were made, then I wanted the change
+		//to implement.  I'm not sure if it is working perfectly.
 	    //********************this is a lower priority task*****************************
-	    String difficulty  = prefs.getString("difficulty_level", "Easy");
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(view);
 		TextView txtP2 = (TextView) this.view.findViewById(R.id.difficulty_level);
-		txtP2.setText(String.format(" %s", difficulty));
+		txtP2.setText(String.format(" %s", prefs.getString("difficulty_level","NA")));
 		
 	}
 

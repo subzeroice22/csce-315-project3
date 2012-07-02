@@ -35,6 +35,10 @@
 	<string name="hard_value">2</string>
 	<string name="difficulty_title">Difficulty</string>
 	<string name="difficulty_summary">Chose the difficulty at which the AI will play.</string>
-	<string name="difficulty_level">Easy</string>
+	<string name="difficulty_level">difficulty_level</string>
 	<string name="show_allowed_positions">show allowed postions?</string>
+	<string name="white_label">White (goes first)</string>
+	<string name="black_label">Black (goes second)</string>
+	<string name="player_color_summary">Chose which color you play against the AI</string>
+	<string name="player_color_title">"Player\'s color"</string>
 </resources>

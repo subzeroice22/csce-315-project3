@@ -10,4 +10,12 @@
     <item >@string/medium_value</item>
     <item >@string/hard_value</item>
 </string-array>
+<string-array name="player_color">
+    <item >@string/white_label</item>
+    <item >@string/black_label</item>
+</string-array>
+<string-array name="player_values">
+    <item >@string/p1</item>
+    <item >@string/p2</item>
+</string-array>
 </resources>

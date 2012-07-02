@@ -59,7 +59,7 @@ public class Reversi extends Activity implements GameEventsListener,
 			this.gameFacade = new GameFacadeImpl();
 			this.gameFacade.setMachineOpponent(Settings.getIsDroidOpponent(getBaseContext()));
 			this.gameFacade.setGameLogic(new GameLogicImpl(new Board()));
-			this.gameFacade.setDifficulty(Settings.getDifficulty(getBaseContext()));
+
 		} else {
 			this.refreshCounters();
 		}
@@ -199,7 +199,7 @@ public class Reversi extends Activity implements GameEventsListener,
 	private void restart() {
 		this.gameFacade.restart();
 		this.gameFacade.setMachineOpponent(Settings.getIsDroidOpponent(getBaseContext()));
-		this.gameFacade.setDifficulty(Settings.getDifficulty(getBaseContext()));
+//		this.gameFacade.setDifficulty(Settings.getDifficulty(getBaseContext()));
 		this.refreshCounters();
 		GameBoard gameBoard = (GameBoard) this.findViewById(R.id.gameBoard);
 		gameBoard.invalidate();

@@ -1,7 +1,7 @@
 package team2.reversi;
 
 import team2.reversi.Direction;
-import team2.reversi.GameLogic;
+
 
 /**
  * Validates matrix possibilities for the users
@@ -187,7 +187,7 @@ public class MatrixChecker {
 		boolean enclosing = false;
 
 		// checking if is possible to enclose left & down
-		if (col > 1 && row < GameLogic.ROWS - 1) {
+		if (col > 1 && row < GameLogicImpl.ROWS - 1) {
 
 			// impossible enclose if adjacent chip is not
 			// opponent
@@ -212,7 +212,7 @@ public class MatrixChecker {
 		boolean enclosing = false;
 
 		// checking if is possible to enclose left & down
-		if (col < GameLogic.COLS - 1 && row < GameLogic.ROWS - 1) {
+		if (col < GameLogicImpl.COLS - 1 && row < GameLogicImpl.ROWS - 1) {
 
 			// impossible enclose if adjacent chip is not
 			// opponent
@@ -237,7 +237,7 @@ public class MatrixChecker {
 		boolean enclosing = false;
 
 		// checking if is possible to enclose left & down
-		if (col < GameLogic.COLS - 1 && row > 1) {
+		if (col < GameLogicImpl.COLS - 1 && row > 1) {
 
 			// impossible enclose if adjacent chip is not
 			// opponent
@@ -286,7 +286,7 @@ public class MatrixChecker {
 			x += directionX;
 			y += directionY;
 			// if we are inside the bounds of the board game
-			if (x >= 0 && x < GameLogic.COLS && y >= 0 && y < GameLogic.COLS) {
+			if (x >= 0 && x < GameLogicImpl.COLS && y >= 0 && y < GameLogicImpl.COLS) {
 
 				if (this.gameMatrix[x][y] != player) {
 					resolved = true;
@@ -312,10 +312,10 @@ public class MatrixChecker {
 
 		int opp = GameLogicImpl.EMPTY;
 
-		if (player == GameLogic.PLAYER_ONE) {
-			opp = GameLogic.PLAYER_TWO;
-		} else if (player == GameLogic.PLAYER_TWO) {
-			opp = GameLogic.PLAYER_ONE;
+		if (player == GameLogicImpl.player_one) {
+			opp = GameLogicImpl.player_two;
+		} else if (player == GameLogicImpl.player_two) {
+			opp = GameLogicImpl.player_one;
 		}
 		return opp;
 	}

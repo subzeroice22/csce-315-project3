@@ -155,7 +155,7 @@ public class GameBoard extends View {
 				this.setPosition(col, row, this.gameFacade.getCurrentPlayer());
 			} else {
 				// if we are playing against droid, checking if we are player 1
-				if (this.gameFacade.getCurrentPlayer() == GameFacade.PLAYER_ONE) {
+				if (this.gameFacade.getCurrentPlayer() == GameFacadeImpl.player_one) {
 					this.setPosition(col, row, this.gameFacade
 							.getCurrentPlayer());
 				}
@@ -194,7 +194,7 @@ public class GameBoard extends View {
 		int row = (int) ((y - TOP_MARGIN) / this.cellHeight);
 
 		// if tapped outside the board
-		if (row < 0 || row >= GameLogic.ROWS) {
+		if (row < 0 || row >= GameLogicImpl.ROWS) {
 			row = -1;
 		}
 
@@ -212,7 +212,7 @@ public class GameBoard extends View {
 		int col = (int) ((x - LEFT_MARGIN) / this.cellWidth);
 
 		// if tapped outside the board
-		if (col < 0 || col >= GameLogic.COLS) {
+		if (col < 0 || col >= GameLogicImpl.COLS) {
 			col = -1;
 		}
 
@@ -285,16 +285,16 @@ public class GameBoard extends View {
 
 			//if we are in 2 player mode or we are in 1 player mode and player is one 
 			if (!this.gameFacade.getMachineOpponent()
-					|| this.gameFacade.getCurrentPlayer() == GameFacade.PLAYER_ONE) {
+					|| this.gameFacade.getCurrentPlayer() == GameFacadeImpl.player_one) {
 
 				// getting the positions to mark
 				int[][] allowedPos = this.gameFacade
 						.getAllowedPositionsForPlayer();
 
-				for (int i = 0; i < GameLogic.COLS; i++) {
-					for (int j = 0; j < GameLogic.ROWS; j++) {
+				for (int i = 0; i < GameLogicImpl.COLS; i++) {
+					for (int j = 0; j < GameLogicImpl.ROWS; j++) {
 						// if there is a position of a player to draw
-						if (allowedPos[i][j] != GameLogic.EMPTY) {
+						if (allowedPos[i][j] != GameLogicImpl.EMPTY) {
 							// drawing hypothetic positions
 							this.drawPosition(i, j, allowedPos[i][j], false);
 						}
@@ -309,7 +309,7 @@ public class GameBoard extends View {
 	 * Gets the color for the inside of the circle of the given player
 	 */
 	private int getInsideColorForPlayer(int player) {
-		if (player == GameLogic.PLAYER_ONE) {
+		if (player == GameLogicImpl.player_one) {
 			return this.playerOneInsideColor;
 		} else {
 			return this.playerTwoInsideColor;
@@ -320,7 +320,7 @@ public class GameBoard extends View {
 	 * Gets the color for the given player
 	 */
 	private int getColorForPlayer(int player) {
-		if (player == GameLogic.PLAYER_ONE) {
+		if (player == GameLogicImpl.player_one) {
 			return this.playerOneColor;
 		} else {
 			return this.playerTwoColor;
@@ -396,7 +396,7 @@ public class GameBoard extends View {
 
 		for (int col = 0; col < NUMBER_OF_COLUMNS; col++) {
 			for (int row = 0; row < NUMBER_OF_ROWS; row++) {
-				if (gameMatrix[col][row] != GameLogic.EMPTY) {
+				if (gameMatrix[col][row] != GameLogicImpl.EMPTY) {
 					this.drawPosition(col, row, gameMatrix[col][row], true);
 				}
 			}

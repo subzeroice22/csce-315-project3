@@ -62,7 +62,7 @@ public class MachineThread implements Runnable {
 	 * @return
 	 */
 	private Movement machinePlays() {
-		int diff = Integer.parseInt(this.gameLogic.getDifficulty());
+		int diff = 0;//TODO: haven't yet figured out where to store and get difficulty Integer.parseInt(this.gameLogic.getDifficulty());
 		AI ai = new AI(this.gameLogic.getBoard(),diff);
 		Movement best = ai.getBestMove(GameLogic.PLAYER_TWO);
 		return best;

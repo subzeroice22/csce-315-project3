@@ -125,6 +125,5 @@ public interface GameLogic {
 	 */
 	int getMobilityForPlayer(int player);
 	
-	public void setDifficulty(String difficulty);
-	public String getDifficulty();
+
 }

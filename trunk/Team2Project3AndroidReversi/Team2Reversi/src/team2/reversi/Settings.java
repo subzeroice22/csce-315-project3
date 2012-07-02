@@ -1,6 +1,7 @@
 package team2.reversi;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
@@ -60,7 +61,25 @@ public class Settings extends PreferenceActivity {
 		return PreferenceManager.getDefaultSharedPreferences(context)
 				.getBoolean(IS_DROID_OPPONENT, true);
 	}
+	String ListPreference;
+	public static String getDifficultyLevel(Context context){
+		return PreferenceManager.getDefaultSharedPreferences(context).getString(DIFFICULTY_LEVEL, "NA");
+	}
 	
+	public static int isAIFirst(Context context, String player){
+		String playersChoice = "White (goes first)";
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		playersChoice = prefs.getString("player_color","White (goes first)");
+		if(playersChoice.equals("White (goes first)")&&player.equals("player_one"))
+			return 1;
+		if(playersChoice.equals("White (goes first)")&&player.equals("player_two"))
+			return 2;
+		if(playersChoice.equals("Black (goes second)")&&player.equals("player_one"))
+			return 2;
+		if(playersChoice.equals("Black (goes second)")&&player.equals("player_two"))
+			return 1;
+		return 1;
+	}
     //********************this is a low priority task*****************************
     //TODO we might need setter and getters for difficultyLevel
 	//I'm not sure how this is supposed to work, but I also have a displayDifficulty()
@@ -68,10 +87,6 @@ public class Settings extends PreferenceActivity {
 	//@string/difficulty_level all in the same function.
     //I think the one in GuiUpdater.java is closer to correct.
     //********************this is a low priority task*****************************
-	public static String getDifficulty(Context context){
-		return PreferenceManager.getDefaultSharedPreferences(context)
-				.getString(DIFFICULTY_LEVEL,"2");
-	}
-	
+
 
 }

@@ -20,8 +20,8 @@ import org.w3c.dom.Node;
 
 
 import android.renderscript.Element;
-
-public class Write {
+import team2.reversi.GameFacade;
+public class Write{
 
 	public void writeFile() {
 		
@@ -46,7 +46,7 @@ public class Write {
 				
 				// set attribute to entry element
 				Attr attr = doc.createAttribute("difficulty");
-				attr.setValue(GameFacadeImpl.difficultyLevel);
+//				attr.setValue(GameFacadeImpl.difficultyLevel);
 				((org.w3c.dom.Element) entry).setAttributeNode(attr);
 				
 				//short method
@@ -54,13 +54,13 @@ public class Write {
 				
 				// winning difference
 				Element differ = (Element) doc.createElement("differential");
-				String winDif = Integer.toString(GameFacadeImpl.winningDifferential);				
-				((Node) differ).appendChild(doc.createTextNode(winDif));
+//				String winDif = Integer.toString(GameFacadeImpl.winningDifferential);				
+//				((Node) differ).appendChild(doc.createTextNode(winDif));
 				
 				// game time
 				Element runTime = (Element) doc.createElement("gameTime");
-				String time = Long.toString(GameFacadeImpl.gameTime);
-				((Node) runTime).appendChild(doc.createTextNode(time));
+//				String time = Long.toString(GameFacadeImpl.gameTime);
+//				((Node) runTime).appendChild(doc.createTextNode(time));
 				
 				// date
 				Element date = (Element) doc.createElement("date");

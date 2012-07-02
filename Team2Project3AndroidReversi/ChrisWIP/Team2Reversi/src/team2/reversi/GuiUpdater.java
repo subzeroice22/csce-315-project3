@@ -35,29 +35,12 @@ public class GuiUpdater implements Runnable {
 	@Override
 	public void run() {
 		this.setPlayersCounters(score1, score2);
-		this.displayDifficulty();
+
 		GameBoard board = (GameBoard) this.view.findViewById(R.id.gameBoard);
 		board.drawPositions();
 		board.invalidate();
 	}
 
-	/**
-	 * Displays the difficulty level
-	 */
-	private void displayDifficulty() {
-	     SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(view);
-	    //********************this is a lower priority task*****************************
-	    //TODO Display Difficulty Level on main screen.
-	    //Team, I'm trying to get a value from the ListPreference in res\xml\settings.xml
-	    //so that we can update the value of the @string\diffuclty_level on the 
-	    //res\layout\main.xml
-	    //See GameFacadeImpl.java for my attempt at getters and setters for a
-	 	//game difficultyLevel
-	    //********************this is a lower priority task*****************************
-	    String difficulty  = prefs.getString("difficulty_level", "Easy");
-		TextView txtP2 = (TextView) this.view.findViewById(R.id.difficulty_level);
-		txtP2.setText(String.format(" %s", difficulty));
-	}
 
 	/**
 	 * Draws the scores

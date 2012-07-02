@@ -147,7 +147,7 @@ public class GameFacadeImpl implements GameFacade {
 		if (this.gameEventsListener != null) {
 			int p1 = this.gameLogic.getCounterForPlayer(PLAYER_ONE);
 			int p2 = this.gameLogic.getCounterForPlayer(PLAYER_TWO);
-
+			String difficulty = this.getDifficulty();
 			this.gameEventsListener.onScoreChanged(p1, p2);
 
 			if (this.gameLogic.isFinished()) {
@@ -162,6 +162,11 @@ public class GameFacadeImpl implements GameFacade {
 			}
 
 		}
+	}
+
+	private String getDifficulty() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/**
@@ -245,13 +250,13 @@ public class GameFacadeImpl implements GameFacade {
 	//Since GameFacadeImpl.java implements GameFacade.java I had to declare the
 	//below functions in GameFacade.java
     //********************this is a HIGH priority task*****************************
-	/**
-	 * sets the difficulty level in the gameLogic
-	 */
-	public void setDifficulty(String Difficulty) {
-		this.gameLogic.setDifficulty(Difficulty);
+
+	@Override
+	public void setDifficulty(String difficulty) {
+		// TODO Auto-generated method stub
+		
 	}
-	/**
-	 * gets if the opponent is droid
-	 */
+
+
+	
 }

@@ -43,7 +43,7 @@ public class AI {
 	//menu.  See GameFacadeImpl.java for my attempt at getters and setters for a
 	//game difficultyLevel
     //********************this is a HIGH priority task*****************************
-	private int depth = 2;
+	private int depth = 0;
 
 	/**
 	 * The best move

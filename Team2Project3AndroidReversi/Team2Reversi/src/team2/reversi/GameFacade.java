@@ -1,22 +1,12 @@
 package team2.reversi;
 
-import java.util.Date;
+
 
 public interface GameFacade {
 	
-	/**
-	 * players
-	 */
-	public static int PLAYER_ONE = 1;
+	int NONE = 0;
 	
-	public static int PLAYER_TWO = 2;
-	
-	public static int NONE = 0;
-	
-	public static long START_TIME = 0;
-	
-	public static long STOP_TIME = 0;
-	
+
 	/**
 	 * starts a new game
 	 */
@@ -83,8 +73,7 @@ public interface GameFacade {
 	 */
 	public boolean getMachineOpponent();
 
-	public void setDifficulty(String difficulty);
-	public String getDifficulty();
+
 	public void setStartTime();
 	public long getStartTime();
 	public void setStopTime();
@@ -92,5 +81,5 @@ public interface GameFacade {
 	public int getWinningDifferential();
 	public void setWinningDifferential(int winningDifferential);
 	public void setGameTime();
-	public String getGameTime();
+	public long getGameTime();
 }

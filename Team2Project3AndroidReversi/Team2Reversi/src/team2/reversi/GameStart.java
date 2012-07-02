@@ -709,7 +709,7 @@ class gameStart {
 		if( (((x==0&&y==1)||(x==1&&y==0))&&childBoard.GetSquare(0,0)==Square.empty)||
 			(((x==0&&y==6)||(x==1&&y==7))&&childBoard.GetSquare(0,7)==Square.empty)||
 			(((x==6&&y==0)||(x==7&&y==1))&&childBoard.GetSquare(7,0)==Square.empty)||
-			(((x==6&&y==7)||(7==1&&y==6))&&childBoard.GetSquare(7,7)==Square.empty)){
+			(((x==6&&y==7)||(x==1&&y==6))&&childBoard.GetSquare(7,7)==Square.empty)){
 				if(moveOwner==Global2.CurrentPlayer)
 					return -1500;
 				else
@@ -757,7 +757,7 @@ class gameStart {
 		if( (((x==0&&y==1)||(x==1&&y==0))&&childBoard.GetSquare(0,0)==Square.empty)||
 			(((x==0&&y==6)||(x==1&&y==7))&&childBoard.GetSquare(0,7)==Square.empty)||
 			(((x==6&&y==0)||(x==7&&y==1))&&childBoard.GetSquare(7,0)==Square.empty)||
-			(((x==6&&y==7)||(7==1&&y==6))&&childBoard.GetSquare(7,7)==Square.empty)){
+			(((x==6&&y==7)||(x==1&&y==6))&&childBoard.GetSquare(7,7)==Square.empty)){
 				if(moveOwner==Global2.CurrentPlayer)
 					return -5000/(depth+1);//36,28@-3000/33,31@5000&6000/39,25@-7000
 				else
@@ -861,7 +861,7 @@ class gameStart {
 		if( (((x==0&&y==1)||(x==1&&y==0))&&childBoard.GetSquare(0,0)==Square.empty)||
 			(((x==0&&y==6)||(x==1&&y==7))&&childBoard.GetSquare(0,7)==Square.empty)||
 			(((x==6&&y==0)||(x==7&&y==1))&&childBoard.GetSquare(7,0)==Square.empty)||
-			(((x==6&&y==7)||(7==1&&y==6))&&childBoard.GetSquare(7,7)==Square.empty)){
+			(((x==6&&y==7)||(x==1&&y==6))&&childBoard.GetSquare(7,7)==Square.empty)){
 				if(moveOwner==Global2.CurrentPlayer)
 					return -5000/(depth+1);//36,28@-3000/33,31@5000&6000/39,25@-7000
 				else
@@ -1042,7 +1042,7 @@ class gameStart {
 		int MaxMoveWeight=-99999;
 
 		Vector<Pair>vals=parentBoard.GetValidMoves(forecastPlayer);
-		Vector<Integer> weights;	
+		//Vector<Integer> weights;	
 //		if(!endGameEvaluator(parentBoard))
 //			return endGameEvaluator(parentBoard);
 		if(endGameEvaluator(parentBoard)!=0)

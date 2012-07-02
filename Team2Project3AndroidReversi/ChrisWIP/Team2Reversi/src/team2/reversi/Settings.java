@@ -28,7 +28,7 @@ public class Settings extends PreferenceActivity {
 	 * This key is used to know the difficulty of the AI
 	 */
 	
-	private static final String DIFFICULTY_LEVEL = "difficulty_level";
+	private static String DIFFICULTY_LEVEL = "difficulty_level";
 	
 	// ///////////////////// OVERRIDES //////////////////////////////////////
 	/**

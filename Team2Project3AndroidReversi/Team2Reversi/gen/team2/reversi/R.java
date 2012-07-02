@@ -11,6 +11,8 @@ public final class R {
     public static final class array {
         public static final int level_values=0x7f050001;
         public static final int levels=0x7f050000;
+        public static final int player_color=0x7f050002;
+        public static final int player_values=0x7f050003;
     }
     public static final class attr {
     }
@@ -40,6 +42,7 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f060000;
+        public static final int black_label=0x7f060025;
         public static final int confirm_title=0x7f060009;
         public static final int difficulty_level=0x7f060022;
         public static final int difficulty_summary=0x7f060021;
@@ -59,6 +62,8 @@ public final class R {
         public static final int no_caption=0x7f06000b;
         public static final int p1=0x7f060001;
         public static final int p2=0x7f060002;
+        public static final int player_color_summary=0x7f060026;
+        public static final int player_color_title=0x7f060027;
         public static final int redo_label=0x7f060016;
         public static final int redo_shortcut=0x7f060017;
         public static final int restart_label=0x7f060006;
@@ -74,6 +79,7 @@ public final class R {
         public static final int stats_shortcut=0x7f060011;
         public static final int undo_label=0x7f060014;
         public static final int undo_shortcut=0x7f060015;
+        public static final int white_label=0x7f060024;
         public static final int yes_caption=0x7f06000a;
     }
     public static final class xml {

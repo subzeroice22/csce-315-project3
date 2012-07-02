@@ -3,9 +3,41 @@ package team2.reversi;
 //import team2.reversi.Direction;
 //import team2.reversi.GameLogic;
 
+
 public class GameLogicImpl implements GameLogic {
 
 	// /////////////////////// PRIVATE FIELDS //////////////////////////
+	/***
+	 * Board dimensions
+	 */
+	public static int COLS = 8;
+
+	public static int ROWS = 8;
+	
+	public static int EMPTY = 0;
+	
+	/******************************************************
+	 * TODO: I moved the FINAL variables out of the IMPLEMENT classes
+	 * GameFacade and GameLogic, into GameFacadeImpl and GameLogicImpl.
+	 * I couldn't alter those variables while they were inside the Implement
+	 * classes.  I changed PLAYER_ONE and PLAYER_TWO to lower case public 
+	 * variables and changed all references throughout the package.  Then I tried 
+	 * to use getSharedPreferences from within isAIFirst() to determine which color
+	 * the user selected and set player_one and player_two respectively.
+	 * My first attempt at this compiled but seg faulted.  I didn't have time to 
+	 * debug.
+	 */
+/*	private static Context context = null;
+
+	public void UserPreferences(Context context) {
+		GameLogicImpl.context = context;
+    }*///was trying to create a context for this class that could be used with the isAIFirst method below
+
+	/**
+	 * players
+	 */
+	public static int player_one = 1;//Settings.isAIFirst(context.getApplicationContext(), "player_one");
+	public static int player_two = 2;//Settings.isAIFirst(context.getApplicationContext(), "player_two");
 
 	/**
 	 * The matrix
@@ -21,7 +53,7 @@ public class GameLogicImpl implements GameLogic {
 	/**
 	 * The player that has to play
 	 */
-	private int currentPlayer = GameLogic.PLAYER_ONE;
+	private int currentPlayer = player_one;
 
 	// /////////////////////// LIFETIME ////////////////////////////////
 	/**
@@ -69,14 +101,30 @@ public class GameLogicImpl implements GameLogic {
 		}
 		return allowCount == 0;
 	}
-
+	
+	/****************************************************
+	 * TODO: this was an attempt to allow the human to chose
+	 * white or black.  Didn't have time to see it through.
+	 * Something broke after I tried to implement and I had to
+	 * backtrack a bunch and comment much out.
+	 * @param color
+	 */
+	public void setAIColor(String color){
+		if(color.equals("White (goes first)")){
+			player_two = 1;
+			player_one = 2;
+		}else{
+			player_one = 1;
+			player_two = 2;
+		}
+	}
 	/**
 	 * Informs if the game is finished
 	 * @return
 	 */
 	public boolean isFinished() {
 		
-		return (isBlockedPlayer(PLAYER_ONE) && isBlockedPlayer(PLAYER_TWO));
+		return (isBlockedPlayer(player_one) && isBlockedPlayer(player_two));
 	}
 
 	/**
@@ -178,7 +226,7 @@ public class GameLogicImpl implements GameLogic {
 	
 	@Override
 	public void initialize() {
-		this.currentPlayer = PLAYER_ONE;
+		this.currentPlayer = player_one;
 		this.board = new Board();
 		this.matrixChecker = new MatrixChecker(this.board);
 	}
@@ -248,14 +296,5 @@ public class GameLogicImpl implements GameLogic {
 		return this.board;
 	}
 
-	
-
-	
-
-	
-	
-
-	
-	
 
 }

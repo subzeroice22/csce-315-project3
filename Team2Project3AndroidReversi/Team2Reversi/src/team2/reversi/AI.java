@@ -157,8 +157,8 @@ public class AI {
 	private int evaluateStrategicPosition(Board board, int player) {
 
 		int total = 0;
-		for (int i = 0; i < GameLogic.COLS; i++) {
-			for (int j = 0; j < GameLogic.ROWS; j++) {
+		for (int i = 0; i < GameLogicImpl.COLS; i++) {
+			for (int j = 0; j < GameLogicImpl.ROWS; j++) {
 				if (board.getMatrix()[i][j] == player) {
 					total += this.values[i][j];
 				}

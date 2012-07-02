@@ -1,6 +1,6 @@
 package team2.reversi;
 
-import java.util.Scanner;
+
 import java.util.Stack;
 import java.util.Vector;
 

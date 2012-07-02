@@ -1,24 +1,11 @@
 package team2.reversi;
 
+
 //import Board;
 
 public interface GameLogic {
 	
-	/***
-	 * Board dimensions
-	 */
-	public static int COLS = 8;
 
-	public static int ROWS = 8;
-	
-	/**
-	 * players
-	 */
-	public static int PLAYER_ONE = 1;
-	
-	public static int PLAYER_TWO = 2;
-	
-	public static int EMPTY = 0;
 	
 	/**
 	 * Informs if a given player can set a chip in a given cell

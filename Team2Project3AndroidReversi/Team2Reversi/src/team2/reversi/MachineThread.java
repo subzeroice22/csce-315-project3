@@ -42,7 +42,7 @@ public class MachineThread implements Runnable {
 		do {
 			Movement machineMovement = this.machinePlays();
 			if (machineMovement != null) {
-				playerHasChanged = this.doMovement(GameLogic.PLAYER_TWO,
+				playerHasChanged = this.doMovement(GameLogicImpl.player_two,
 						machineMovement.getColumn(), machineMovement
 								.getRow());
 			} else {
@@ -63,7 +63,7 @@ public class MachineThread implements Runnable {
 	 */
 	private Movement machinePlays() {
 		AI ai = new AI(this.gameLogic.getBoard());
-		Movement best = ai.getBestMove(GameLogic.PLAYER_TWO);
+		Movement best = ai.getBestMove(GameLogicImpl.player_two);
 		return best;
 	}
 	
@@ -94,17 +94,17 @@ public class MachineThread implements Runnable {
 	 */
 	private void notifyChanges() {
 		if (this.gameEventsListener != null) {
-			int p1 = this.gameLogic.getCounterForPlayer(GameLogic.PLAYER_ONE);
-			int p2 = this.gameLogic.getCounterForPlayer(GameLogic.PLAYER_TWO);
+			int p1 = this.gameLogic.getCounterForPlayer(GameLogicImpl.player_one);
+			int p2 = this.gameLogic.getCounterForPlayer(GameLogicImpl.player_two);
 
 			this.gameEventsListener.onScoreChanged(p1, p2);
 
 			if (this.gameLogic.isFinished()) {
-				int winner = GameLogic.EMPTY;
+				int winner = GameLogicImpl.EMPTY;
 				if (p1 > p2) {
-					winner = GameLogic.PLAYER_ONE;
+					winner = GameLogicImpl.player_one;
 				} else if (p2 > p1) {
-					winner = GameLogic.PLAYER_TWO;
+					winner = GameLogicImpl.player_two;
 				}
 				this.gameEventsListener.onGameFinished(winner);
 			}

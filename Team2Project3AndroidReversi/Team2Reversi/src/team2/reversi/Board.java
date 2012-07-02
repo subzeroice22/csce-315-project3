@@ -47,11 +47,11 @@ public class Board {
 
 		//if the position was occupied by other player, 
 		//reducing the score
-		if (this.gameMatrix[col][row] != GameLogic.EMPTY) {
+		if (this.gameMatrix[col][row] != GameLogicImpl.EMPTY) {
 			scores[this.gameMatrix[col][row]-1]--;
 		}
 		this.gameMatrix[col][row] = player;
-		if (player != GameLogic.EMPTY) {
+		if (player != GameLogicImpl.EMPTY) {
 			scores[player - 1]++;
 		}
 	}
@@ -64,18 +64,18 @@ public class Board {
 	public Board clone() {
 		Board cloned = new Board();
 		
-		int[][] clonedMatrix = new int[GameLogic.COLS][GameLogic.ROWS];
+		int[][] clonedMatrix = new int[GameLogicImpl.COLS][GameLogicImpl.ROWS];
 		
-		for(int i = 0; i < GameLogic.COLS; i++) {
-			for (int j = 0; j < GameLogic.ROWS; j++) {
+		for(int i = 0; i < GameLogicImpl.COLS; i++) {
+			for (int j = 0; j < GameLogicImpl.ROWS; j++) {
 				clonedMatrix[i][j] = this.gameMatrix[i][j];
 			}
 		}
 		
 		//cloned.setMatrix(this.gameMatrix.clone());
 		cloned.setMatrix(clonedMatrix);
-		cloned.setCounterForPlayer(GameLogic.PLAYER_ONE, this.scores[0]);
-		cloned.setCounterForPlayer(GameLogic.PLAYER_TWO, this.scores[1]);
+		cloned.setCounterForPlayer(GameLogicImpl.player_one, this.scores[0]);
+		cloned.setCounterForPlayer(GameLogicImpl.player_two, this.scores[1]);
 		//System.out.println(GameHelper.counter++);
 		return cloned;
 	}
@@ -104,13 +104,13 @@ public class Board {
 	private void initializeMatrix() {
 		for (int col = 0; col < COLS; col++) {
 			for (int row = 0; row < ROWS; row++) {
-				this.gameMatrix[col][row] =	GameLogic.EMPTY;
+				this.gameMatrix[col][row] =	GameLogicImpl.EMPTY;
 			}
 		}
-		this.setStone(3, 3, GameLogic.PLAYER_ONE);
-		this.setStone(4, 4, GameLogic.PLAYER_ONE);
-		this.setStone(3, 4, GameLogic.PLAYER_TWO);
-		this.setStone(4, 3, GameLogic.PLAYER_TWO);
+		this.setStone(3, 3, GameLogicImpl.player_one);
+		this.setStone(4, 4, GameLogicImpl.player_one);
+		this.setStone(3, 4, GameLogicImpl.player_two);
+		this.setStone(4, 3, GameLogicImpl.player_two);
 		
 	}
 	

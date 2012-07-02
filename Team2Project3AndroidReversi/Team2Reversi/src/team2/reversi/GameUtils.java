@@ -23,8 +23,8 @@ public class GameUtils {
 		List<Movement> list = new ArrayList<Movement>();
 
 		// scanning the grid
-		for (int col = 0; col < GameLogic.COLS; col++) {
-			for (int row = 0; row < GameLogic.ROWS; row++) {
+		for (int col = 0; col < GameLogicImpl.COLS; col++) {
+			for (int row = 0; row < GameLogicImpl.ROWS; row++) {
 				// if player can set
 				if (matrixChecker.canSet(player, col, row)) {
 					list.add(new Movement(col, row, player));
@@ -41,10 +41,10 @@ public class GameUtils {
 	 * @return
 	 */
 	public static int opponent(int player) {
-		if (player == GameLogic.PLAYER_ONE) {
-			return GameLogic.PLAYER_TWO;
-		} else if (player == GameLogic.PLAYER_TWO) {
-			return GameLogic.PLAYER_ONE;
+		if (player == GameLogicImpl.player_one) {
+			return GameLogicImpl.player_two;
+		} else if (player == GameLogicImpl.player_two) {
+			return GameLogicImpl.player_one;
 		} else {
 			return 0;
 		}

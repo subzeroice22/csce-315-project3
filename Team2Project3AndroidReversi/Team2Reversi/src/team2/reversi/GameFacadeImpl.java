@@ -2,14 +2,11 @@ package team2.reversi;
 
 import team2.reversi.GameFacade;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import android.text.format.DateFormat;
-import android.text.format.Time;
+
 import team2.reversi.GameEventsListener;
 import team2.reversi.GameLogic;
 
@@ -22,7 +19,38 @@ import team2.reversi.GameLogic;
 public class GameFacadeImpl implements GameFacade {
 
 	// /////////////////////// PRIVATE FIELDS //////////////////////////
+	/***
+	 * Board dimensions
+	 */
+	public static int COLS = 8;
 
+	public static int ROWS = 8;
+	
+	public static int EMPTY = 0;
+	/******************************************************
+	 * TODO: I moved the FINAL variables out of the IMPLEMENT classes
+	 * GameFacade and GameLogic, into GameFacadeImpl and GameLogicImpl.
+	 * I couldn't alter those variables while they were inside the Implement
+	 * classes.  I changed PLAYER_ONE and PLAYER_TWO to lower case public 
+	 * variables and changed all references throughout the package.  Then I tried 
+	 * to use getSharedPreferences from within isAIFirst() to determine which color
+	 * the user selected and set player_one and player_two respectively.
+	 * My first attempt at this compiled but seg faulted.  I didn't have time to 
+	 * debug.
+	 */
+/*	private static Context context = null;
+
+	public void UserPreferences(Context context) {
+		GameFacadeImpl.context = context;
+    }*/
+
+	/**
+	 * players
+	 */
+	public static int player_one = 1;//Settings.isAIFirst(context.getApplicationContext(), "player_one");
+	public static int player_two = 2;//Settings.isAIFirst(context.getApplicationContext(), "player_two");
+	
+	
 	/**
 	 * access to the game operations
 	 */
@@ -43,13 +71,13 @@ public class GameFacadeImpl implements GameFacade {
 	 */
 	private String difficultyLevel = "Easy";	
 	
-	private long startTime;
+	private long startTime = 0;
 	
-	private long stopTime;
+	private long stopTime = 0;
 	
-	private long gameTime;
+	private long gameTime = 0;
 	
-	private int winningDifferential;
+	private int winningDifferential = 0;
 	
 
 	// /////////////////////// PUBLIC METHODS //////////////////////////
@@ -76,7 +104,7 @@ public class GameFacadeImpl implements GameFacade {
 		playerHasChanged = this.doMovement(player, col, row);
 		// if is the machine moment...
 		if (this.isMachineOpponent && playerHasChanged && 
-				this.gameLogic.getCurrentPlayer() == GameLogic.PLAYER_TWO) {
+				this.gameLogic.getCurrentPlayer() == player_two) {
 			
 				//TODO launch second thread
 			
@@ -150,17 +178,17 @@ public class GameFacadeImpl implements GameFacade {
 	 */
 	private void notifyChanges() {
 		if (this.gameEventsListener != null) {
-			int p1 = this.gameLogic.getCounterForPlayer(PLAYER_ONE);
-			int p2 = this.gameLogic.getCounterForPlayer(PLAYER_TWO);
+			int p1 = this.gameLogic.getCounterForPlayer(player_one);
+			int p2 = this.gameLogic.getCounterForPlayer(player_two);
 
 			this.gameEventsListener.onScoreChanged(p1, p2);
 
 			if (this.gameLogic.isFinished()) {
 				int winner = NONE;
 				if (p1 > p2) {
-					winner = GameLogic.PLAYER_ONE;
+					winner = player_one;
 				} else if (p2 > p1) {
-					winner = GameLogic.PLAYER_TWO;
+					winner = player_two;
 				}
 
 				this.gameEventsListener.onGameFinished(winner);
@@ -200,7 +228,7 @@ public class GameFacadeImpl implements GameFacade {
 	@SuppressWarnings("unused")
 	private Movement machinePlays() {
 		AI ai = new AI(this.gameLogic.getBoard());
-		Movement best = ai.getBestMove(GameLogic.PLAYER_TWO);
+		Movement best = ai.getBestMove(GameLogicImpl.player_two);
 		return best;
 	}
 	
@@ -275,31 +303,26 @@ public class GameFacadeImpl implements GameFacade {
 		return this.difficultyLevel;
 	}
 	public void setStartTime(){
-		this.startTime = System.currentTimeMillis();
+		
+		startTime = System.currentTimeMillis();
 	}
 
 	public long getStartTime(){
-		return this.startTime;
+		return startTime;
 	}
 	public void setStopTime(){
-		this.stopTime = System.currentTimeMillis();
+		stopTime = System.currentTimeMillis();
 	}
 	public long getStopTime(){
-		return this.stopTime;
+		return stopTime;
 	}
 	
 	public void setGameTime(){
-		this.gameTime = this.stopTime-this.startTime;
+		gameTime = getStopTime()-getStartTime();
 	}
 	
-	public String getGameTime(){
-	    // Create a DateFormatter object for displaying date in specified format.
-	    SimpleDateFormat formatter = new SimpleDateFormat("hh:mm:ss");
-
-	    // Create a calendar object that will convert the date and time value in milliseconds to date. 
-	     Calendar calendar = Calendar.getInstance();
-	     calendar.setTimeInMillis(this.stopTime-this.startTime);
-	     return formatter.format(calendar.getTime());
+	public long getGameTime(){
+	    return gameTime;
 	}
 
 	public int getWinningDifferential() {

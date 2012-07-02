@@ -2,18 +2,26 @@
 <PreferenceScreen
   xmlns:android="http://schemas.android.com/apk/res/android">
   <CheckBoxPreference
-  	android:key="@string/app_name"
+  	android:key="show_allowed_positions"
   	android:title="@string/show_hints"
   	android:summary="@string/show_hints_description"
   	android:defaultValue="true"/>
   <CheckBoxPreference
-  	android:key="@string/is_droid_opponent"
+  	android:key="is_droid_opponent"
   	android:title="@string/is_droid_opponent"
   	android:summary="@string/is_droid_opponent_description"
   	android:defaultValue="true"/>
   <ListPreference 
       android:entries="@array/levels" 
-      android:entryValues="@array/level_values" 
-      android:key="@string/difficulty_level" 
-      android:title="@string/difficulty_title" android:summary="@string/difficulty_summary" android:defaultValue="@array/level_values"/>	
+      android:entryValues="@array/levels" 
+      android:key="difficulty_level" 
+      android:title="@string/difficulty_title" 
+      android:summary="@string/difficulty_summary" 
+      android:defaultValue="@string/easy_label"/>
+  <ListPreference android:entries="@array/player_color" 
+      android:entryValues="@array/player_color" 
+      android:summary="@string/player_color_summary" 
+      android:title="@string/player_color_title" 
+      android:key="player_color" 
+      android:defaultValue="@string/white_label"/>	
 </PreferenceScreen>

@@ -107,10 +107,27 @@ public class Board {
 				this.gameMatrix[col][row] =	GameLogicImpl.EMPTY;
 			}
 		}
-		this.setStone(3, 3, GameLogicImpl.player_one);
-		this.setStone(4, 4, GameLogicImpl.player_one);
-		this.setStone(3, 4, GameLogicImpl.player_two);
-		this.setStone(4, 3, GameLogicImpl.player_two);
+		this.setStone(3, 4, 1);
+		this.setStone(4, 3, 1);
+		this.setStone(3, 3, 2);
+		this.setStone(4, 4, 2);
+/*		if(GameLogicImpl.player_one==1){
+			this.setStone(3, 3, GameLogicImpl.player_one);
+			this.setStone(4, 4, GameLogicImpl.player_one);
+			this.setStone(3, 4, GameLogicImpl.player_two);
+			this.setStone(4, 3, GameLogicImpl.player_two);
+		}else if(GameLogicImpl.player_one==2){
+			this.setStone(3, 4, GameLogicImpl.player_one);
+			this.setStone(4, 3, GameLogicImpl.player_one);
+			this.setStone(3, 3, GameLogicImpl.player_two);
+			this.setStone(4, 4, GameLogicImpl.player_two);
+		}else{
+			this.setStone(3, 3, GameLogicImpl.player_one);
+			this.setStone(4, 4, GameLogicImpl.player_one);
+			this.setStone(3, 4, GameLogicImpl.player_two);
+			this.setStone(4, 3, GameLogicImpl.player_two);
+		}*/
+
 		
 	}
 	

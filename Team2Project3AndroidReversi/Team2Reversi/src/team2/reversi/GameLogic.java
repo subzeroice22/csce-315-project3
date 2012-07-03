@@ -5,8 +5,6 @@ package team2.reversi;
 
 public interface GameLogic {
 	
-
-	
 	/**
 	 * Informs if a given player can set a chip in a given cell
 	 * @param player
@@ -15,7 +13,8 @@ public interface GameLogic {
 	 * @return
 	 */
 	boolean canSet (int player, int col, int row);
-	
+	int getPlayerOne();
+	int getPlayerTwo();
 	/**
 	 * returns the string equivalent of the current difficulty level
 	 */
@@ -27,6 +26,10 @@ public interface GameLogic {
 	 */
 //	public void setDifficulty(String difficulty);
 	
+	void undo();
+	void redo();
+	void movementDone();
+		
 	/**
 	 * Sets the given chip in the given cell
 	 * @param player
@@ -105,4 +108,14 @@ public interface GameLogic {
 	 * Gets the number of movements for the given player
 	 */
 	int getMobilityForPlayer(int player);
+	
+	void setDifficulty(String difficulty);
+	String getDifficulty();
+
+	void setPlayerColor(String playerColorString);
+	String getPlayerColor();
+	
+
+	
+	
 }

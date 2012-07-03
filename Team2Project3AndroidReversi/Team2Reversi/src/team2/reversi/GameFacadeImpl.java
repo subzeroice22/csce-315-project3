@@ -27,6 +27,8 @@ public class GameFacadeImpl implements GameFacade {
 	public static int ROWS = 8;
 	
 	public static int EMPTY = 0;
+	
+	public static boolean firstPlay = true;
 	/******************************************************
 	 * TODO: I moved the FINAL variables out of the IMPLEMENT classes
 	 * GameFacade and GameLogic, into GameFacadeImpl and GameLogicImpl.
@@ -47,10 +49,15 @@ public class GameFacadeImpl implements GameFacade {
 	/**
 	 * players
 	 */
-	public static int player_one = 1;//Settings.isAIFirst(context.getApplicationContext(), "player_one");
-	public static int player_two = 2;//Settings.isAIFirst(context.getApplicationContext(), "player_two");
-	
-	
+	//public static int player_one = 1;//Settings.isAIFirst(context.getApplicationContext(), "player_one");
+	//public static int player_two = 2;//Settings.isAIFirst(context.getApplicationContext(), "player_two");
+
+	public int getPlayerOne(){
+		return this.gameLogic.getPlayerOne();
+	}
+	public int getPlayerTwo(){
+		return this.gameLogic.getPlayerTwo();
+	}
 	/**
 	 * access to the game operations
 	 */
@@ -69,8 +76,7 @@ public class GameFacadeImpl implements GameFacade {
 	/**
 	 * Indicates if we are in 1 player mode or 2 player mode
 	 */
-	private String difficultyLevel = "Easy";	
-	
+
 	private long startTime = 0;
 	
 	private long stopTime = 0;
@@ -79,6 +85,13 @@ public class GameFacadeImpl implements GameFacade {
 	
 	private int winningDifferential = 0;
 	
+	
+	public void undo(){
+		this.gameLogic.undo();
+	}
+	public void redo(){
+		this.gameLogic.redo();
+	}
 
 	// /////////////////////// PUBLIC METHODS //////////////////////////
 
@@ -96,15 +109,20 @@ public class GameFacadeImpl implements GameFacade {
 	 */
 	@Override
 	public void set(int player, int col, int row) {
-
+		int AI = 2;
 		boolean playerHasChanged;
 		//if the next player has no move then doMove will perform the move
 		//and then return false so that playerhasChanged becomes false.
 		//otherwise, playerHasChanged will become true.
+		if(this.gameLogic.getPlayerOne()==2){
+			AI = 1;
+		}else{
+			AI = 2;
+		}
 		playerHasChanged = this.doMovement(player, col, row);
 		// if is the machine moment...
-		if (this.isMachineOpponent && playerHasChanged && 
-				this.gameLogic.getCurrentPlayer() == player_two) {
+		if (this.isMachineOpponent && (firstPlay||playerHasChanged) && 
+				this.gameLogic.getCurrentPlayer() == AI) {
 			
 				//TODO launch second thread
 			
@@ -116,6 +134,7 @@ public class GameFacadeImpl implements GameFacade {
 			threadExecutor.execute(secondThread);	
 			
 		}
+		firstPlay=false;
 
 	}
 
@@ -169,26 +188,31 @@ public class GameFacadeImpl implements GameFacade {
 			this.gameLogic.conquerPosition(player, col, row);
 			changePlayer = this.togglePlayer();
 		}
+		this.gameLogic.movementDone();
 		this.notifyChanges();
 		return changePlayer;
 	}
 
+	public void movementDone(){
+		this.gameLogic.movementDone();
+	}
+	
 	/**
 	 * Notifies the listener for the changes occured in the game
 	 */
 	private void notifyChanges() {
 		if (this.gameEventsListener != null) {
-			int p1 = this.gameLogic.getCounterForPlayer(player_one);
-			int p2 = this.gameLogic.getCounterForPlayer(player_two);
+			int p1 = this.gameLogic.getCounterForPlayer(this.gameLogic.getPlayerOne());
+			int p2 = this.gameLogic.getCounterForPlayer(this.gameLogic.getPlayerTwo());
 
 			this.gameEventsListener.onScoreChanged(p1, p2);
 
 			if (this.gameLogic.isFinished()) {
 				int winner = NONE;
 				if (p1 > p2) {
-					winner = player_one;
+					winner = this.gameLogic.getPlayerOne();
 				} else if (p2 > p1) {
-					winner = player_two;
+					winner = this.gameLogic.getPlayerTwo();
 				}
 
 				this.gameEventsListener.onGameFinished(winner);
@@ -220,19 +244,6 @@ public class GameFacadeImpl implements GameFacade {
 		}
 		return toggled;
 	}
-
-	/**
-	 * Calculates the machine movement
-	 * @return
-	 */
-	@SuppressWarnings("unused")
-	private Movement machinePlays() {
-		AI ai = new AI(this.gameLogic.getBoard());
-		Movement best = ai.getBestMove(GameLogicImpl.player_two);
-		return best;
-	}
-	
-	
 	
 
 	// /////////////////////// ACCESSORS //////////////////////////
@@ -293,15 +304,7 @@ public class GameFacadeImpl implements GameFacade {
 	/**
 	 * sets the difficulty level in the gameLogic
 	 */
-	public void setDifficulty(String Difficulty) {
-		this.difficultyLevel = Difficulty;
-	}
-	/**
-	 * gets if the opponent is droid
-	 */
-	public String getDifficulty() {
-		return this.difficultyLevel;
-	}
+	
 	public void setStartTime(){
 		
 		startTime = System.currentTimeMillis();
@@ -332,5 +335,16 @@ public class GameFacadeImpl implements GameFacade {
 	public void setWinningDifferential(int winningDifferential) {
 		this.winningDifferential = winningDifferential;
 	}
+	
+	public void setDifficulty(String difficulty){
+		this.gameLogic.setDifficulty(difficulty);
+	}
+
+	@Override
+	public void setPlayerColor(String playerColorString) {
+		this.gameLogic.setPlayerColor(playerColorString);
+	}
+	
+	
 
 }

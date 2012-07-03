@@ -57,7 +57,16 @@ public class AI {
 
 	private int[] sign = new int[] { 1, -1 };
 
-	public AI(Board board) {
+	public AI(Board board, String Difficulty) {
+		if(Difficulty=="Easy"){
+			depth=0;			
+		}else if(Difficulty=="Medium"){
+			depth=1;
+		}else if(Difficulty=="Hard"){
+			depth=2;
+		}else
+			depth=0;
+		
 		this.board = board;
 		System.out.println("***************************** RANDOM " + POSITIONS_COEFF);
 	}

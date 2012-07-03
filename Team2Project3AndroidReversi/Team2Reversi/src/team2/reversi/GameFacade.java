@@ -12,6 +12,10 @@ public interface GameFacade {
 	 */
 	void restart();
 	
+	void undo();
+	void redo();
+	void movementDone();
+	
 	/**
 	 * Sets a chip in the given position
 	 * @param player
@@ -20,7 +24,8 @@ public interface GameFacade {
 	 */
 	void set (int player, int col, int row);
 	
-	
+	int getPlayerOne();
+	int getPlayerTwo();
 	/**
 	 * Gets the current player
 	 * @return
@@ -46,6 +51,8 @@ public interface GameFacade {
 	 */
 	void setGameLogic(GameLogic gameLogic);
 
+	public void setDifficulty(String difficulty);
+	public void setPlayerColor(String playerColorString);
 
 	/**
 	 * The given listener will be notified when the score changes
@@ -82,4 +89,7 @@ public interface GameFacade {
 	public void setWinningDifferential(int winningDifferential);
 	public void setGameTime();
 	public long getGameTime();
+
+
+	
 }

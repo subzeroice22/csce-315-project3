@@ -63,18 +63,64 @@ public class GameBoard extends View {
 
 	private int cellHeight;
 
-	/**
-	 * The color used by the player 1
-	 */
-	private int playerOneColor = Color.WHITE;
+
+/*	private int playerOneColor = Color.WHITE;
 	private int playerOneInsideColor = Color.rgb(255, 255, 255);
 
+
+	private int playerTwoColor = Color.BLACK;
+	private int playerTwoInsideColor = Color.rgb(0, 0, 0);*/
+
+	public int getPlayerOneColor(){
+		if(this.gameFacade.getPlayerOne()==1){
+			return Color.BLACK;
+		}
+		else if(this.gameFacade.getPlayerOne()==2){
+			return Color.WHITE;
+		}
+		else{
+			return Color.BLACK;
+		}
+		
+	}
+	public int getPlayerOneInsideColor(){
+		if(this.gameFacade.getPlayerOne()==1){
+			return Color.rgb(0,0,0);//black
+		}
+		else if(this.gameFacade.getPlayerOne()==2){
+			return Color.rgb(255,255,255);//white
+		}
+		else{
+			return Color.rgb(0,0,0);//black
+		}
+	}
 	/**
 	 * Color used by player 2
 	 */
-	private int playerTwoColor = Color.BLACK;
-	private int playerTwoInsideColor = Color.rgb(0, 0, 0);
+	public int getPlayerTwoColor(){
+		if(this.gameFacade.getPlayerTwo()==1){
+			return Color.BLACK;
+		}
+		else if(this.gameFacade.getPlayerTwo()==2){
+			return Color.WHITE;
+		}
+		else{
+			return Color.WHITE;
+		}
+	}
+	public int getPlayerTwoInsideColor(){
+		if(this.gameFacade.getPlayerTwo()==1){
+			return Color.rgb(0,0,0);//black
+		}
+		else if(this.gameFacade.getPlayerTwo()==2){
+			return Color.rgb(255,255,255);//white
+		}
+		else{
+			return Color.rgb(255,255,255);//white
+		}
+	}
 
+	
 	/**
 	 * The first time parameters are not calculated
 	 */
@@ -131,6 +177,8 @@ public class GameBoard extends View {
 
 		// setting all possible position
 		this.markAllowedPositions();
+		
+
 
 	}
 
@@ -155,7 +203,8 @@ public class GameBoard extends View {
 				this.setPosition(col, row, this.gameFacade.getCurrentPlayer());
 			} else {
 				// if we are playing against droid, checking if we are player 1
-				if (this.gameFacade.getCurrentPlayer() == GameFacadeImpl.player_one) {
+			
+				if (this.gameFacade.getCurrentPlayer() == this.gameFacade.getPlayerOne()) {
 					this.setPosition(col, row, this.gameFacade
 							.getCurrentPlayer());
 				}
@@ -282,10 +331,12 @@ public class GameBoard extends View {
 	 */
 	private void markAllowedPositions() {
 		if (Settings.getShowAllowedPositions(getContext())) {
-
+			int AI = 2;
+			if(this.gameFacade.getPlayerOne()==2)
+				AI = 1;
 			//if we are in 2 player mode or we are in 1 player mode and player is one 
 			if (!this.gameFacade.getMachineOpponent()
-					|| this.gameFacade.getCurrentPlayer() == GameFacadeImpl.player_one) {
+					|| this.gameFacade.getCurrentPlayer() != AI) {
 
 				// getting the positions to mark
 				int[][] allowedPos = this.gameFacade
@@ -310,9 +361,9 @@ public class GameBoard extends View {
 	 */
 	private int getInsideColorForPlayer(int player) {
 		if (player == GameLogicImpl.player_one) {
-			return this.playerOneInsideColor;
+			return this.getPlayerOneInsideColor();
 		} else {
-			return this.playerTwoInsideColor;
+			return this.getPlayerTwoInsideColor();
 		}
 	}
 
@@ -321,9 +372,9 @@ public class GameBoard extends View {
 	 */
 	private int getColorForPlayer(int player) {
 		if (player == GameLogicImpl.player_one) {
-			return this.playerOneColor;
+			return this.getPlayerOneColor();
 		} else {
-			return this.playerTwoColor;
+			return this.getPlayerTwoColor();
 		}
 	}
 

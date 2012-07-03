@@ -41,11 +41,8 @@ public class Reversi extends Activity implements GameEventsListener,
 	private Handler handler;
 	
 	private List<Statistics> highScores = new ArrayList<Statistics>();
-	
-//	private Settings gameSettings = new Settings();
 
 	// ///////////////////////// LIFETIME /////////////////////////////////
-	
 	/**
 	 * Constructor
 	 */
@@ -60,22 +57,26 @@ public class Reversi extends Activity implements GameEventsListener,
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-/////////////////////////////////////////////////////////////////////////
+//VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV CREATION BLOCK VVVVVVVVVVVVVVVVVVVVVVVVVVVVV///
 		super.startActivity(new Intent(this, Settings.class));
-		getPrefs();
 
-//////////////////////////////////////////////////////////////////////////////////
+
 		this.setTitle("Team 2 Reversi");
+		getPrefs();		
 		this.setContentView(R.layout.main);
-		//this.gameFacade.setStartTime();
+		getPrefs();
 		// retrieving the old facade if any
 		// trying to recover the last version
 		this.gameFacade = (GameFacade) this.getLastNonConfigurationInstance();
 		// if is the first time...
 		if (gameFacade == null) {
 			this.gameFacade = new GameFacadeImpl();
-			this.gameFacade.setMachineOpponent(Settings.getIsDroidOpponent(getBaseContext()));
+
 			this.gameFacade.setGameLogic(new GameLogicImpl(new Board()));
+		
+			this.gameFacade.setMachineOpponent(Settings.getIsDroidOpponent(getBaseContext()));
+			this.gameFacade.setDifficulty(difficultyString);
+			this.gameFacade.setPlayerColor(playerColorString);
 		} else {
 			this.refreshCounters();
 		}
@@ -87,42 +88,20 @@ public class Reversi extends Activity implements GameEventsListener,
 		GameBoard gameBoard = (GameBoard) this.findViewById(R.id.gameBoard);
 		gameBoard.setGameFacade(this.gameFacade);
 		startTime = System.currentTimeMillis();
-
+		displayDifficulty();
 	}
+	
 	String difficultyString = "NA";
+	String playerColorString = "Black (goes second)";
+	
 	private void getPrefs(){
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(Reversi.this);
 		difficultyString = prefs.getString("difficulty_level","NA");
+		playerColorString = prefs.getString("player_color", "Black (goes first)");
 	}
 	
-	/********************************************************************
-	 * TODO: There is a method in Settings.java to getDifficulty(), but I haven't 
-	 * had time to test it and for now, I found it easier to get the difficulty with the 
-	 * method above, here in Reversi.java.  There's also a displayDifficulty in GuiUpdater.java
-	 * that uses this same code from within that class.  
-	 * The below code was an attempt to alter the depth of the AI based on the 
-	 * difficulty level.  It didn't work at all.
-	 */
-/*	public void MyClickHandler(View view){
-		switch(view.getId()){
-		case R.id.difficulty_level:
-			if(difficultyString.equals("Easy"))
-				Settings.setDifficultyLevel(0);
-			if(difficultyString.equals("Medium"))
-				gameSettings.setDifficultyLevel(1);
-			if(difficultyString.equals("Hard"))
-				gameSettings.setDifficultyLevel(2);
-			else
-				gameSettings.setDifficultyLevel(0);
-		}
-	}*/
-	
-	private void displayDifficulty() {
-		TextView txtP2 = (TextView) this.findViewById(R.id.difficulty_level);
-		txtP2.setText(String.format(" %s", difficultyString));
-	}
-	
-	
+
+//VVVVVVVVVVVVVVVVVVVVVVVVVVV BEGIN MENU BLOCK VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV///
 	/**
 	 * Occurs when the user presses the menu key
 	 */
@@ -151,20 +130,14 @@ public class Reversi extends Activity implements GameEventsListener,
 		case R.id.exit:
 			finish();
 		case R.id.undo:
-		    //********************this is a HIGH priority task*****************************
-		    //TODO Implement an undo function.
-			//We need to set the gameBoard one level back if playing against another human (no AI)
-		    //or set the gameBoard back two versions if playing against the AI as the AI will have
-		    //already made another board...
-		    //********************this is a HIGH priority task*****************************
+			this.gameFacade.undo();
+			GameBoard gameBoard = (GameBoard) this.findViewById(R.id.gameBoard);
+			gameBoard.invalidate();
 			break;
 		case R.id.redo:
-		    //********************this is a HIGH priority task*****************************
-		    //TODO Implement a redo function.
-			//We need to set the gameBoard forward one level, reseting to the gameBoard before
-		    //the undo.  If playing against the AI we need to set the gameBoard forward the two
-		    //levels we had undone.
-		    //********************this is a HIGH priority task*****************************
+			this.gameFacade.redo();
+			GameBoard gBoard = (GameBoard) this.findViewById(R.id.gameBoard);
+			gBoard.invalidate();
 			break;
 		case R.id.stats:
 		    //********************this is a HIGH priority task*****************************
@@ -174,7 +147,7 @@ public class Reversi extends Activity implements GameEventsListener,
 		    //include {Difficulty, Winning Differential, Length of Game, Date/Time}
 			//See also: onGameFinished() for notes on writing high scores to SD Card
 		    //********************this is a HIGH priority task*****************************
-			this.showSimplePopUp();
+			this.showHighScores();
 			break;
 		default:
 			return false;
@@ -200,10 +173,12 @@ public class Reversi extends Activity implements GameEventsListener,
 	 */
 	@Override
 	public Object onRetainNonConfigurationInstance() {
-
 		return this.gameFacade;
 	}
-
+	
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^END MENU BLOCK ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^///
+	
+////VVVVVVVVVVVVVVVVVVVVVVVVVVVVVV GUI UPDATE BLOCK VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV///
 	/**
 	 * Occurs when the score has changed... so refreshing counters
 	 */
@@ -220,11 +195,8 @@ public class Reversi extends Activity implements GameEventsListener,
 	public void onGameFinished(int winner) {
 		
 		String playerName;
-
-		
 		int p1 = this.gameFacade.getScoreForPlayer(GameLogicImpl.player_one);
 		int p2 = this.gameFacade.getScoreForPlayer(GameLogicImpl.player_two);
-		
 		
 		if (winner == GameLogicImpl.player_one) {
 			playerName = getResources().getString(R.string.p1);
@@ -245,9 +217,19 @@ public class Reversi extends Activity implements GameEventsListener,
 		//difficulty.
 	    //********************this is a HIGH priority task*****************************
 	}
-
-	
-	// ///////////////////////// PRIVATE METHODS ///////////////////////////////
+	/********************************************************************
+	 * TODO: There is a method in Settings.java to getDifficulty(), but I haven't 
+	 * had time to test it and for now, I found it easier to get the difficulty with the 
+	 * method above, here in Reversi.java.  There's also a displayDifficulty in GuiUpdater.java
+	 * that uses this same code from within that class.  
+	 * The below code was an attempt to alter the depth of the AI based on the 
+	 * difficulty level.  It didn't work at all.
+	 */
+	private void displayDifficulty() {
+		TextView txtP2 = (TextView) this.findViewById(R.id.difficulty_level);
+		txtP2.setText(String.format(" %s", difficultyString));
+	}
+////////////////////////////////BEGIN PRIVATE METHODS ///////////////////////////////
 
 	/**
 	 * Restarts the facade and the graphics
@@ -260,7 +242,7 @@ public class Reversi extends Activity implements GameEventsListener,
 		GameBoard gameBoard = (GameBoard) this.findViewById(R.id.gameBoard);
 		gameBoard.invalidate();
 		displayDifficulty();
-
+		this.gameFacade.setDifficulty(difficultyString);
 	}
 
 	/**
@@ -268,8 +250,8 @@ public class Reversi extends Activity implements GameEventsListener,
 	 */
 	private void refreshCounters() {
 
-		int p1 = this.gameFacade.getScoreForPlayer(GameFacadeImpl.player_one);
-		int p2 = this.gameFacade.getScoreForPlayer(GameFacadeImpl.player_two);
+		int p1 = this.gameFacade.getScoreForPlayer(this.gameFacade.getPlayerOne());
+		int p2 = this.gameFacade.getScoreForPlayer(this.gameFacade.getPlayerOne());
 		this.setPlayersCounters(p1, p2);
 	}
 
@@ -282,10 +264,8 @@ public class Reversi extends Activity implements GameEventsListener,
 		txtP1.setText(String.format(" %d", p1Score));
 		TextView txtP2 = (TextView) this.findViewById(R.id.txtPlayer2Counter);
 		txtP2.setText(String.format(" %d", p2Score));
-		
 	}
 	
-
 	/**
 	 * shows the dialog for confirmation of the restart
 	 */
@@ -294,7 +274,7 @@ public class Reversi extends Activity implements GameEventsListener,
 		ConfirmationDialog cd = new ConfirmationDialog(this);
 		cd.showConfirmation(this, message);
 	}
-	private void showSimplePopUp() {
+	private void showHighScores() {
 
 		Date gameTime = new Date(System.currentTimeMillis()-startTime);
 		SimpleDateFormat speedFormat = new SimpleDateFormat("HH:mm:ss", Locale.US);
@@ -317,7 +297,10 @@ public class Reversi extends Activity implements GameEventsListener,
 		  AlertDialog helpDialog = helpBuilder.create();
 		  helpDialog.show();
 		  }
-
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ END GUI UPDATE BLOCK ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//////	
+	
+	
+///VVVVVVVVVVVVVVVVVVVVVVVVVVVVV HIGH SCORE METHODS  VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//
 	public List<Statistics> getHighScores() {
 		return highScores;
 	}
@@ -345,4 +328,5 @@ public class Reversi extends Activity implements GameEventsListener,
 			ioe.printStackTrace();
 		}
 	}
+///////////////////////////////END HIGH SCORE METHODS///////////////////////////////////
 }

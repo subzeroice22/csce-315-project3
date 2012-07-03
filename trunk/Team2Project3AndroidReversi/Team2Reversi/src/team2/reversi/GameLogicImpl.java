@@ -2,7 +2,7 @@ package team2.reversi;
 
 //import team2.reversi.Direction;
 //import team2.reversi.GameLogic;
-
+import java.util.Stack;
 
 public class GameLogicImpl implements GameLogic {
 
@@ -27,23 +27,30 @@ public class GameLogicImpl implements GameLogic {
 	 * My first attempt at this compiled but seg faulted.  I didn't have time to 
 	 * debug.
 	 */
-/*	private static Context context = null;
 
-	public void UserPreferences(Context context) {
-		GameLogicImpl.context = context;
-    }*///was trying to create a context for this class that could be used with the isAIFirst method below
 
 	/**
 	 * players
 	 */
-	public static int player_one = 1;//Settings.isAIFirst(context.getApplicationContext(), "player_one");
-	public static int player_two = 2;//Settings.isAIFirst(context.getApplicationContext(), "player_two");
+	public static int player_one = 1;//normally human
+	public static int player_two = 2;//normally AI
 
+	public int getPlayerOne(){
+		
+		return player_one;
+	}
+
+	public int getPlayerTwo() {
+		return player_two;
+	}
+	
 	/**
 	 * The matrix
 	 */
 	private Board board;
-	
+
+	Stack<Board> boardHistory;
+	Stack<Board> redoStack;
 	
 	/**
 	 * Just a helper.
@@ -62,7 +69,8 @@ public class GameLogicImpl implements GameLogic {
 	public GameLogicImpl(Board board) {
 		this.board = board;
 		this.matrixChecker = new MatrixChecker(board);
-		
+		this.boardHistory= new Stack<Board>();
+		this.redoStack = new Stack<Board>();
 	}
 
 	// /////////////////////// PUBLIC METHODS //////////////////////////
@@ -109,15 +117,17 @@ public class GameLogicImpl implements GameLogic {
 	 * backtrack a bunch and comment much out.
 	 * @param color
 	 */
-	public void setAIColor(String color){
-		if(color.equals("White (goes first)")){
-			player_two = 1;
-			player_one = 2;
-		}else{
-			player_one = 1;
-			player_two = 2;
+/*	public static int setAIColor(String color, String player){
+		if(color.equals("White (goes second)")&&player.equals("player_one")){
+			return 2;
+		}else if(color.equals("White (goes second)")&&player.equals("player_two")){
+			return 1;
+		}else if(color.equals("Black (goes first)")&&player.equals("player_one")){
+			return 1;
+		}else if(color.equals("Black (goes first)")&&player.equals("player_two")){
+			return 2;
 		}
-	}
+	}*/////changed the setter below to handle this
 	/**
 	 * Informs if the game is finished
 	 * @return
@@ -177,6 +187,27 @@ public class GameLogicImpl implements GameLogic {
 		}
 		return mobility;
 	}
+	
+	public void movementDone(){
+		redoStack.clear();
+		boardHistory.push(this.board.clone());
+	}
+	
+	public void undo(){
+		if(boardHistory.size()<3){return;}
+		redoStack.push(boardHistory.pop());
+		redoStack.push(boardHistory.pop());
+		this.board = boardHistory.peek().clone();
+		matrixChecker.setMatrix(this.board.getMatrix());
+	}
+	public void redo(){
+		if(redoStack.size()<2){return;}
+		boardHistory.push(redoStack.pop());
+		boardHistory.push(redoStack.pop());
+		this.board = boardHistory.peek().clone();
+		matrixChecker.setMatrix(this.board.getMatrix());
+	}
+	
 	
 	/**
 	 * Conquers the positions in all directions (if the player is enclosing opponent pieces, 
@@ -295,6 +326,34 @@ public class GameLogicImpl implements GameLogic {
 	public Board getBoard() {
 		return this.board;
 	}
+	
+	private String Difficulty;
+
+	private static String playerColorChoice;
+	
+	public void setDifficulty(String difficulty){
+		this.Difficulty = difficulty;
+	}
+	public String getDifficulty(){
+		return this.Difficulty;
+	}
+	public void setPlayerColor(String playerColorString){
+		if(playerColorString.equals("White (goes second)")){
+			player_one=2;
+			player_two=1;
+		}else if(playerColorString.equals("Black (goes first)")){
+			player_one = 1;
+			player_two = 2;
+			
+		}else{
+			player_one = 1;
+			player_two = 2;
+		}
+	}
+	public String getPlayerColor(){
+		return GameLogicImpl.playerColorChoice;
+	}
+
 
 
 }

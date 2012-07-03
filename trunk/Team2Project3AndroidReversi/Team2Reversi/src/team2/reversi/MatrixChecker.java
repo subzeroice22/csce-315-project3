@@ -27,6 +27,11 @@ public class MatrixChecker {
 
 		this.gameMatrix = board.getMatrix();
 	}
+	
+	public void setMatrix(int[][] matrix){
+		gameMatrix = matrix;
+	}
+	
 
 	/**
 	 * Verifies if a user can set in a given cell

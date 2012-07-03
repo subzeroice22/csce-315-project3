@@ -34,12 +34,12 @@ public class GuiUpdater implements Runnable{
 	 */
 	@Override
 	public void run() {
+//		displayDifficulty();
 		this.setPlayersCounters(score1, score2);
-		displayDifficulty();
 		GameBoard board = (GameBoard) this.view.findViewById(R.id.gameBoard);
 		board.drawPositions();
 		board.invalidate();
-		displayDifficulty();//a second time just to make sure.
+//		displayDifficulty();//a second time just to make sure.
 		
 	}
 

@@ -62,7 +62,10 @@ public class MachineThread implements Runnable {
 	 * @return
 	 */
 	private Movement machinePlays() {
-		AI ai = new AI(this.gameLogic.getBoard());
+		String difficulty = this.gameLogic.getDifficulty();
+		//now send the difficulty along to to AI
+		
+		AI ai = new AI(this.gameLogic.getBoard(),difficulty);
 		Movement best = ai.getBestMove(GameLogicImpl.player_two);
 		return best;
 	}
@@ -84,6 +87,7 @@ public class MachineThread implements Runnable {
 			this.gameLogic.conquerPosition(player, col, row);
 			changePlayer = this.togglePlayer();
 		}
+		this.gameLogic.movementDone();
 		this.notifyChanges();
 		return changePlayer;
 	}

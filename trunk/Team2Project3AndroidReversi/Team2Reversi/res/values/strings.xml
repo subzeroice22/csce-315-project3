@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="app_name">Reversi</string>
-	<string name="p1">White</string>
-	<string name="p2">Black</string>
-	<string name="settings_label">Settings&#8230;</string>
+	<string name="p1">Black</string>
+	<string name="p2">White</string>
+	<string name="settings_label">Setting changes require restart from main menu.</string>
 	<string name="show_hints">Show allowed positions</string>
 	<string name="settings_shortcut">s</string>
 	<string name="restart_label">Start a new game</string>

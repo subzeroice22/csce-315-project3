@@ -346,7 +346,7 @@ public class GameBoard extends View {
 					for (int j = 0; j < GameLogicImpl.ROWS; j++) {
 						// if there is a position of a player to draw
 						if (allowedPos[i][j] != GameLogicImpl.EMPTY) {
-							// drawing hypothetic positions
+							// drawing hypothetical positions
 							this.drawPosition(i, j, allowedPos[i][j], false);
 						}
 					}

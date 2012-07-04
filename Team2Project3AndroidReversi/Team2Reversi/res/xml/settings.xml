@@ -23,5 +23,6 @@
       android:summary="@string/player_color_summary" 
       android:title="@string/player_color_title" 
       android:key="player_color" 
-      android:defaultValue="@string/white_label"/>	
+      android:defaultValue="@string/white_label"/><PreferenceCategory android:key="Instructions" android:title="Use the back button to begin play." android:summary="Use the back button to begin play."></PreferenceCategory>
+  	
 </PreferenceScreen>

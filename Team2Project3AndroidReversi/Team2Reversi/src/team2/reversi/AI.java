@@ -58,11 +58,11 @@ public class AI {
 	private int[] sign = new int[] { 1, -1 };
 
 	public AI(Board board, String Difficulty) {
-		if(Difficulty=="Easy"){
+		if(Difficulty.equals("Easy")){
 			depth=0;			
-		}else if(Difficulty=="Medium"){
+		}else if(Difficulty.equals("Medium")){
 			depth=1;
-		}else if(Difficulty=="Hard"){
+		}else if(Difficulty.equals("Hard")){
 			depth=2;
 		}else
 			depth=0;

@@ -49,6 +49,9 @@ public class Reversi extends Activity implements GameEventsListener,
 	public Reversi() {
 		this.handler = new Handler();
 	}
+	
+	String difficultyString = "NA";
+	String playerColorString = "Black (goes second)";
 	// ///////////////////////// EVENTS ///////////////////////////////////
 
 	/** Called when the activity is first created. */
@@ -62,37 +65,39 @@ public class Reversi extends Activity implements GameEventsListener,
 
 
 		this.setTitle("Team 2 Reversi");
-		getPrefs();		
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(Reversi.this);
+		difficultyString = prefs.getString("difficulty_level","NA");
+		playerColorString = prefs.getString("player_color", "Black (goes first)");	
 		this.setContentView(R.layout.main);
-		getPrefs();
 		// retrieving the old facade if any
 		// trying to recover the last version
 		this.gameFacade = (GameFacade) this.getLastNonConfigurationInstance();
 		// if is the first time...
 		if (gameFacade == null) {
 			this.gameFacade = new GameFacadeImpl();
-
+			//this.gameFacade.setPlayerColor(playerColorString);
 			this.gameFacade.setGameLogic(new GameLogicImpl(new Board()));
 		
 			this.gameFacade.setMachineOpponent(Settings.getIsDroidOpponent(getBaseContext()));
 			this.gameFacade.setDifficulty(difficultyString);
-			this.gameFacade.setPlayerColor(playerColorString);
+			//this.gameFacade.setPlayerColor(playerColorString);
 		} else {
 			this.refreshCounters();
 		}
 		// caution. "this" has been re-constructed after an orientation
 		// change... so need to
 		// subscribe as listener again
+
 		this.gameFacade.setGameEventsListener(this);
 
 		GameBoard gameBoard = (GameBoard) this.findViewById(R.id.gameBoard);
 		gameBoard.setGameFacade(this.gameFacade);
 		startTime = System.currentTimeMillis();
 		displayDifficulty();
+
 	}
 	
-	String difficultyString = "NA";
-	String playerColorString = "Black (goes second)";
+
 	
 	private void getPrefs(){
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(Reversi.this);
@@ -235,14 +240,18 @@ public class Reversi extends Activity implements GameEventsListener,
 	 * Restarts the facade and the graphics
 	 */
 	private void restart() {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(Reversi.this);
+		difficultyString = prefs.getString("difficulty_level","NA");
+		playerColorString = prefs.getString("player_color", "Black (goes first)");
 		startTime = System.currentTimeMillis();
 		this.gameFacade.restart();
 		this.gameFacade.setMachineOpponent(Settings.getIsDroidOpponent(getBaseContext()));
+		this.gameFacade.setDifficulty(difficultyString);
 		this.refreshCounters();
 		GameBoard gameBoard = (GameBoard) this.findViewById(R.id.gameBoard);
 		gameBoard.invalidate();
 		displayDifficulty();
-		this.gameFacade.setDifficulty(difficultyString);
+
 	}
 
 	/**
@@ -275,16 +284,17 @@ public class Reversi extends Activity implements GameEventsListener,
 		cd.showConfirmation(this, message);
 	}
 	private void showHighScores() {
-
 		Date gameTime = new Date(System.currentTimeMillis()-startTime);
 		SimpleDateFormat speedFormat = new SimpleDateFormat("HH:mm:ss", Locale.US);
-		SimpleDateFormat gameDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);		 
+		SimpleDateFormat gameDateFormat = new SimpleDateFormat("yyyy-MM-dd ", Locale.US);	
+		TextView myView = new TextView(getApplicationContext());
+		myView.setText(	"DIFFICULTY\tSCORE DIFFERENCE\tSPEED\t\t\tDATE\n"+
+				difficultyString + "\t\t\t" +this.gameFacade.getWinningDifferential()+"\t\t\t\t"+ 
+				speedFormat.format(gameTime)+"\t"+gameDateFormat.format(System.currentTimeMillis()));
+		myView.setTextSize(10);
 		AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
 		helpBuilder.setTitle("High Scores");
-		helpBuilder.setMessage(	difficultyString + " " + 
-								this.gameFacade.getWinningDifferential()+" "+ 
-								speedFormat.format(gameTime)+" "+
-								gameDateFormat.format(System.currentTimeMillis()));
+		helpBuilder.setView(myView);
 		helpBuilder.setPositiveButton("Ok",
 				new DialogInterface.OnClickListener() {
 		
